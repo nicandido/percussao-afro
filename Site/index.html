@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Percussão Afro-Brasileira | Acervo Digital</title>
+  <meta name="description" content="Projeto individual sobre a importância dos instrumentos de percussão na cultura afro-brasileira." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#inicio" class="logo">
+        <span class="logo__icon">◉</span>
+        <span class="logo__text">Percussão<em>Afro</em></span>
+      </a>
+
+      <nav class="nav" aria-label="Menu principal">
+        <ul class="nav__list">
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#manifestacoes">Manifestações</a></li>
+          <li><a href="#instrumentos">Instrumentos</a></li>
+          <li><a href="#projeto">Projeto</a></li>
+          <li><a href="pages/login.html" class="btn btn--outline btn--sm">Login</a></li>
+          <li><a href="pages/cadastro.html" class="btn btn--primary btn--sm">Cadastrar</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <div class="hero__overlay"></div>
+    <div class="container hero__content">
+      <p class="hero__eyebrow">Projeto Individual</p>
+      <h1 class="hero__title">
+        O ritmo que atravessa<br />
+        <span class="highlight">gerações e ancestrais</span>
+      </h1>
+      <p class="hero__subtitle">
+        Um acervo digital sobre a importância dos instrumentos de percussão
+        na cultura afro-brasileira — suas funções, manifestações e memórias.
+      </p>
+      <div class="hero__actions">
+        <a href="#manifestacoes" class="btn btn--primary">Explorar manifestações</a>
+        <a href="#sobre" class="btn btn--ghost">Conhecer o projeto</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="section section--dark">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Sobre o projeto</span>
+        <h2 class="section__title">A percussão como memória viva</h2>
+      </div>
+
+      <div class="about">
+        <div class="about__text">
+          <p>
+            A cultura afro-brasileira é parte fundamental da identidade do Brasil,
+            resultado de processos históricos de resistência, preservação de tradições
+            e integração de conhecimentos africanos à sociedade brasileira.
+          </p>
+          <p>
+            Nesse contexto, os instrumentos de percussão vão muito além de produzir
+            som: participam da construção de identidades, do acompanhamento de danças
+            e cantos, da integração entre os participantes e da transmissão de
+            conhecimentos entre gerações.
+          </p>
+          <p>
+            Este projeto une a pesquisa cultural à construção de uma aplicação web
+            com cadastro, consulta e dashboard, aplicando os conhecimentos de
+            HTML, CSS, JavaScript, Node.js, MySQL e Linux adquiridos no semestre.
+          </p>
+        </div>
+
+        <aside class="about__aside">
+          <div class="stat">
+            <span class="stat__number">4</span>
+            <span class="stat__label">Manifestações centrais</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number">+20</span>
+            <span class="stat__label">Instrumentos catalogados</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number">3</span>
+            <span class="stat__label">Entidades no banco</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTAÇÕES -->
+  <section id="manifestacoes" class="section section--light">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Manifestações</span>
+        <h2 class="section__title">Onde a percussão pulsa</h2>
+        <p class="section__desc">
+          Cada manifestação tem seus ritmos, instrumentos e significados próprios.
+        </p>
+      </div>
+
+      <div class="grid grid--4">
+
+        <!-- Card Samba -->
+        <article class="card card--manifest" style="--bg: url('../imagens/samba.jpg');">
+          <div class="card__overlay"></div>
+          <div class="card__emoji-fallback">🥁</div>
+          <div class="card__content">
+            <h3 class="card__title">Samba</h3>
+            <p class="card__text">
+              Surdo, tantã, pandeiro e cuíca sustentam o ritmo das rodas e escolas.
+            </p>
+          </div>
+        </article>
+
+        <!-- Card Capoeira -->
+        <article class="card card--manifest" style="--bg: url('../imagens/capoeira.jpg');">
+          <div class="card__overlay"></div>
+          <div class="card__emoji-fallback">🥋</div>
+          <div class="card__content">
+            <h3 class="card__title">Capoeira</h3>
+            <p class="card__text">
+              Berimbau, atabaque, pandeiro e agogô conduzem o jogo e a ginga.
+            </p>
+          </div>
+        </article>
+
+        <!-- Card Maracatu -->
+        <article class="card card--manifest" style="--bg: url('../imagens/maracatu.jpg');">
+          <div class="card__overlay"></div>
+          <div class="card__emoji-fallback">🌿</div>
+          <div class="card__content">
+            <h3 class="card__title">Maracatu</h3>
+            <p class="card__text">
+              Alfaia, caixa, gonguê e abê marcam o cortejo e a coroação.
+            </p>
+          </div>
+        </article>
+
+        <!-- Card Umbanda -->
+        <article class="card card--manifest" style="--bg: url('../imagens/umbanda.jpg');">
+          <div class="card__overlay"></div>
+          <div class="card__emoji-fallback">🕯️</div>
+          <div class="card__content">
+            <h3 class="card__title">Umbanda</h3>
+            <p class="card__text">
+              Atabaque, agogô e adjá sustentam o ritmo sagrado das cerimônias.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INSTRUMENTOS ============ -->
+  <section id="instrumentos" class="section section--dark">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Instrumentos</span>
+        <h2 class="section__title">Vozes da ancestralidade</h2>
+        <p class="section__desc">
+          Alguns dos instrumentos que estarão catalogados no acervo.
+        </p>
+      </div>
+
+      <div class="grid grid--3">
+        <article class="card card--instrument">
+          <span class="card__badge">Cordas</span>
+          <h3 class="card__title">Berimbau</h3>
+          <p class="card__text">Arco musical de origem africana, coração da capoeira.</p>
+        </article>
+
+        <article class="card card--instrument">
+          <span class="card__badge">Percussão</span>
+          <h3 class="card__title">Atabaque</h3>
+          <p class="card__text">Tambor de grande porte, presente em rituais e rodas.</p>
+        </article>
+
+        <article class="card card--instrument">
+          <span class="card__badge">Percussão</span>
+          <h3 class="card__title">Pandeiro</h3>
+          <p class="card__text">Marca o samba com sonoridade vibrante e giros.</p>
+        </article>
+
+        <article class="card card--instrument">
+          <span class="card__badge">Percussão</span>
+          <h3 class="card__title">Agogô</h3>
+          <p class="card__text">Sinos metálicos que pontuam ritmos e chamados.</p>
+        </article>
+
+        <article class="card card--instrument">
+          <span class="card__badge">Percussão</span>
+          <h3 class="card__title">Cuíca</h3>
+          <p class="card__text">Tambor de fricção com som característico do samba.</p>
+        </article>
+
+        <article class="card card--instrument">
+          <span class="card__badge">Percussão</span>
+          <h3 class="card__title">Alfaia</h3>
+          <p class="card__text">Tambor grave do maracatu, conduz o cortejo.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJETO / CTA ============ -->
+  <section id="projeto" class="section section--accent">
+    <div class="container cta">
+      <div>
+        <h2 class="cta__title">Faça parte do acervo</h2>
+        <p class="cta__text">
+          Cadastre instrumentos, consulte manifestações e explore o dashboard
+          com indicadores culturais do projeto.
+        </p>
+      </div>
+      <div class="cta__actions">
+        <a href="pages/cadastro.html" class="btn btn--dark">Cadastrar instrumento</a>
+        <a href="pages/consulta.html" class="btn btn--outline-dark">Consultar acervo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="logo__icon">◉</span>
+        <span class="logo__text">Percussão<em>Afro</em></span>
+        <p class="footer__tagline">Projeto Individual · SPTECH · 2026</p>
+      </div>
+
+      <div class="footer__links">
+        <h4>Navegação</h4>
+        <a href="#sobre">Sobre</a>
+        <a href="#manifestacoes">Manifestações</a>
+        <a href="#instrumentos">Instrumentos</a>
+      </div>
+
+      <div class="footer__links">
+        <h4>Projeto</h4>
+        <a href="pages/cadastro.html">Cadastro</a>
+        <a href="pages/consulta.html">Consulta</a>
+        <a href="#" target="_blank" rel="noopener">GitHub</a>
+      </div>
+
+      <div class="footer__credit">
+        <p>
+          Desenvolvido por <strong>Nicollas Martins Candido</strong><br />
+          <em>Ogã e umbandista — a percussão como vivência.</em>
+        </p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2026 Percussão Afro. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
