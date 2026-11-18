@@ -236,6 +236,23 @@ ul {
   color: var(--cor-terra);
 }
 
+.nav__list a[href*="quiz"] {
+  background: rgba(212, 162, 76, 0.15);
+  border: 1px solid var(--cor-dourado);
+  color: var(--cor-dourado);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition: all var(--transition);
+}
+
+.nav__list a[href*="quiz"]:hover {
+  background: var(--cor-dourado);
+  color: var(--cor-terra-escura);
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-sm);
+}
+
 /* HERO */
 .hero {
   position: relative;

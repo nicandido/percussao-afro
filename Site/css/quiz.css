@@ -1,0 +1,97 @@
+/* Quiz: estilos específicos da página de desafio cultural */
+.quiz-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.quiz-card {
+  background: #fff;
+  border: 1px solid rgba(74, 37, 17, 0.12);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  box-shadow: var(--sombra-md);
+  margin-bottom: 24px;
+}
+
+.quiz-question {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  color: var(--cor-terra-escura);
+  margin-bottom: 20px;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border: 1px solid rgba(74, 37, 17, 0.2);
+  border-radius: var(--radius-sm);
+  background: #faf5ec;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  color: var(--cor-texto);
+}
+
+.quiz-option:hover {
+  background: var(--cor-bege);
+  border-color: var(--cor-terra);
+}
+
+.quiz-option input {
+  accent-color: var(--cor-terra);
+  width: 18px;
+  height: 18px;
+}
+
+.quiz-actions {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.quiz-result {
+  display: none;
+  text-align: center;
+  padding: 40px;
+  background: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--sombra-md);
+  border: 1px solid var(--cor-dourado);
+}
+
+.quiz-result h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--cor-terra-escura);
+  margin-bottom: 12px;
+}
+
+.quiz-result p {
+  font-size: 1.1rem;
+  color: var(--cor-texto-suave);
+  margin-bottom: 24px;
+}
+
+.feedback {
+  font-size: 0.9rem;
+  margin-top: 10px;
+  font-weight: 600;
+  display: none;
+}
+
+.feedback.correto {
+  color: #2e7d32;
+  display: block;
+}
+
+.feedback.incorreto {
+  color: #c62828;
+  display: block;
+}
