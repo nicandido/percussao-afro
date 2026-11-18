@@ -1,16 +1,15 @@
 /* Acervo: estilos específicos da página de instrumentos */
-.acervo-filtros{display:flex;flex-wrap:wrap;gap:.5rem;margin:2rem 0 .5rem}
-.filtro{font:600 .85rem/1 'Inter',sans-serif;padding:.6rem 1rem;border-radius:999px;border:1px solid rgba(0,0,0,.25);background:#fff;color:#222;cursor:pointer;transition:.2s}
-.filtro:hover{border-color:#000}
-.filtro.is-active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.acervo-filtros{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:2rem 0 .5rem}
+.acervo-filtros label{font-weight:600;margin-right:.5rem}
+#filtro{font:600 .9rem 'Inter',sans-serif;padding:.6rem 1rem;border-radius:8px;border:1px solid rgba(0,0,0,.25);background:#fff;color:#222;cursor:pointer}
 .acervo-contagem{font-size:.9rem;opacity:.75;margin:.5rem 0 1.5rem}
 .acervo-lista{display:flex;flex-direction:column;gap:1.5rem}
-.instrumento[hidden]{display:none}
 .instrumento{display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:0;background:#fff;color:#222;border:1px solid rgba(0,0,0,.1);border-radius:14px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.08)}
-.instrumento__imagem{position:relative;margin:0;min-height:260px;background:#2a2118}
-.instrumento__imagem img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.instrumento__placeholder{display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:#e8c27a;font-size:3rem;text-align:center;padding:1rem}
-.instrumento__placeholder small{font:600 .9rem 'Inter',sans-serif;color:#fff;opacity:.85}
+.instrumento__imagem{position:relative;margin:0;padding:1rem;display:flex;align-items:center;justify-content:center;background:#fff}
+.instrumento__imagem img{width:100%;height:auto;max-height:340px;object-fit:contain;display:block;border-radius:10px}
+.instrumento__placeholder{display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:#8a4b00;font-size:3rem;text-align:center;padding:1rem}
+.instrumento__placeholder small{font:600 .9rem 'Inter',sans-serif;color:#222;opacity:.85}
+.instrumento__imagem.is-missing{min-height:220px;background:#f3ede4}
 .instrumento__imagem.is-missing img{display:none}
 .instrumento__imagem.is-missing .instrumento__placeholder{display:flex}
 .instrumento__corpo{padding:1.5rem 1.75rem}
@@ -29,5 +28,5 @@
 .acervo-vazio{padding:2rem 0;text-align:center}
 @media (max-width:720px){
   .instrumento{grid-template-columns:1fr}
-  .instrumento__imagem{min-height:220px}
 }
+.oculto{display:none}

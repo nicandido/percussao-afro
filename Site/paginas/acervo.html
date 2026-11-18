@@ -24,15 +24,15 @@
     <p>O acervo reúne os instrumentos de percussão das manifestações apresentadas no projeto. Alguns instrumentos que não são de percussão, mas são muito importantes para essas manifestações, também foram incluídos e aparecem identificados como <strong>"Não é percussão"</strong>. As práticas e o uso de cada instrumento podem variar entre comunidades, grupos e terreiros.</p>
   </section>
 
-  <div class="acervo-filtros" role="group" aria-label="Filtrar instrumentos">
-    <button type="button" class="filtro is-active" data-filtro="todos">Todos</button><button type="button" class="filtro" data-filtro="perc">Percussão</button><button type="button" class="filtro" data-filtro="nao">Não é percussão</button><button type="button" class="filtro" data-filtro="samba">Samba</button><button type="button" class="filtro" data-filtro="capoeira">Capoeira</button><button type="button" class="filtro" data-filtro="maracatu">Maracatu</button><button type="button" class="filtro" data-filtro="umbanda">Umbanda</button>
+  <div class="acervo-filtros">
+    <label for="filtro">Filtrar por:</label><select id="filtro" onchange="filtrar()"><option value="todos">Todos</option><option value="perc">Percussão</option><option value="nao">Não é percussão</option><option value="samba">Samba</option><option value="capoeira">Capoeira</option><option value="maracatu">Maracatu</option><option value="umbanda">Umbanda</option></select>
   </div>
-  <p class="acervo-contagem" id="contagem" aria-live="polite"></p>
+  <p class="acervo-contagem" id="contagem"></p>
 
   <section class="acervo-lista" aria-label="Instrumentos do acervo">
-    <article class="instrumento" id="atabaque" data-tipo="perc" data-man="capoeira umbanda">
+    <article class="instrumento perc capoeira umbanda" id="atabaque">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/atabaque.jpg" alt="Atabaque" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/atabaque.jpg" alt="Atabaque">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Atabaque</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -48,9 +48,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="capoeira.html">Capoeira</a><a class="chip chip--link" href="umbanda.html">Umbanda</a></div>
       </div>
     </article>
-    <article class="instrumento" id="berimbau" data-tipo="nao" data-man="capoeira">
+    <article class="instrumento nao capoeira" id="berimbau">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/berimbau.jpg" alt="Berimbau" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/berimbau.jpg" alt="Berimbau">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Berimbau</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -66,9 +66,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="capoeira.html">Capoeira</a></div>
       </div>
     </article>
-    <article class="instrumento" id="caxixi" data-tipo="perc" data-man="capoeira">
+    <article class="instrumento perc capoeira" id="caxixi">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/caxixi.jpg" alt="Caxixi" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/caxixi.jpg" alt="Caxixi">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Caxixi</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -84,9 +84,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="capoeira.html">Capoeira</a></div>
       </div>
     </article>
-    <article class="instrumento" id="pandeiro" data-tipo="perc" data-man="samba capoeira">
+    <article class="instrumento perc samba capoeira" id="pandeiro">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/pandeiro.jpg" alt="Pandeiro" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/pandeiro.jpg" alt="Pandeiro">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Pandeiro</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -102,9 +102,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a><a class="chip chip--link" href="capoeira.html">Capoeira</a></div>
       </div>
     </article>
-    <article class="instrumento" id="agogo" data-tipo="perc" data-man="capoeira samba umbanda maracatu">
+    <article class="instrumento perc capoeira samba umbanda maracatu" id="agogo">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/agogo.jpg" alt="Agogô" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/agogo.jpg" alt="Agogô">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Agogô</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -120,9 +120,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="capoeira.html">Capoeira</a><a class="chip chip--link" href="samba.html">Samba</a><a class="chip chip--link" href="umbanda.html">Umbanda</a><a class="chip chip--link" href="maracatu.html">Maracatu</a></div>
       </div>
     </article>
-    <article class="instrumento" id="gongue" data-tipo="perc" data-man="maracatu">
+    <article class="instrumento perc maracatu" id="gongue">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/gongue.jpg" alt="Gonguê" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/gongue.jpg" alt="Gonguê">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Gonguê</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -138,9 +138,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="maracatu.html">Maracatu</a></div>
       </div>
     </article>
-    <article class="instrumento" id="cuica" data-tipo="perc" data-man="samba">
+    <article class="instrumento perc samba" id="cuica">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/cuica.jpg" alt="Cuíca" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/cuica.jpg" alt="Cuíca">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Cuíca</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -156,9 +156,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
       </div>
     </article>
-    <article class="instrumento" id="surdo" data-tipo="perc" data-man="samba">
+    <article class="instrumento perc samba" id="surdo">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/surdo.jpg" alt="Surdo" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/surdo.jpg" alt="Surdo">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Surdo</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -174,9 +174,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
       </div>
     </article>
-    <article class="instrumento" id="tanta" data-tipo="perc" data-man="samba">
+    <article class="instrumento perc samba" id="tanta">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/tanta.jpg" alt="Tantã" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/tanta.jpg" alt="Tantã">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Tantã</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -192,9 +192,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
       </div>
     </article>
-    <article class="instrumento" id="repique" data-tipo="perc" data-man="samba">
+    <article class="instrumento perc samba" id="repique">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/repique.jpg" alt="Repique" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/repique.jpg" alt="Repique">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Repique</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -210,9 +210,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
       </div>
     </article>
-    <article class="instrumento" id="tamborim" data-tipo="perc" data-man="samba">
+    <article class="instrumento perc samba" id="tamborim">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/tamborim.jpg" alt="Tamborim" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/tamborim.jpg" alt="Tamborim">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Tamborim</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -228,9 +228,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
       </div>
     </article>
-    <article class="instrumento" id="reco-reco" data-tipo="perc" data-man="samba">
+    <article class="instrumento perc samba" id="reco-reco">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/reco-reco.jpg" alt="Reco-reco" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/reco-reco.jpg" alt="Reco-reco">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Reco-reco</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -246,9 +246,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
       </div>
     </article>
-    <article class="instrumento" id="alfaia" data-tipo="perc" data-man="maracatu">
+    <article class="instrumento perc maracatu" id="alfaia">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/alfaia.jpg" alt="Alfaia" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/alfaia.jpg" alt="Alfaia">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Alfaia</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -264,9 +264,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="maracatu.html">Maracatu</a></div>
       </div>
     </article>
-    <article class="instrumento" id="caixa-tarol" data-tipo="perc" data-man="maracatu">
+    <article class="instrumento perc maracatu" id="caixa-tarol">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/caixa-tarol.jpg" alt="Caixa e tarol" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/caixa.jpg" alt="Caixa e tarol">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Caixa e tarol</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -282,9 +282,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="maracatu.html">Maracatu</a></div>
       </div>
     </article>
-    <article class="instrumento" id="mineiro" data-tipo="perc" data-man="maracatu">
+    <article class="instrumento perc maracatu" id="ganza">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/mineiro.jpg" alt="Mineiro (ganzá)" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/ganza.jpg" alt="Mineiro (ganzá)">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Mineiro (ganzá)</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -300,9 +300,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="maracatu.html">Maracatu</a></div>
       </div>
     </article>
-    <article class="instrumento" id="abe" data-tipo="perc" data-man="maracatu umbanda">
+    <article class="instrumento perc maracatu umbanda" id="abe">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/abe.jpg" alt="Abê (xequerê)" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/abe.jpg" alt="Abê (xequerê)">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Abê (xequerê)</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -318,9 +318,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="maracatu.html">Maracatu</a><a class="chip chip--link" href="umbanda.html">Umbanda</a></div>
       </div>
     </article>
-    <article class="instrumento" id="adja" data-tipo="perc" data-man="umbanda">
+    <article class="instrumento perc umbanda" id="adja">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/adja.jpg" alt="Adjá" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/adja.jpg" alt="Adjá">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Adjá</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -336,9 +336,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="umbanda.html">Umbanda</a></div>
       </div>
     </article>
-    <article class="instrumento" id="prato-e-faca" data-tipo="perc" data-man="samba">
+    <article class="instrumento perc samba" id="prato-e-faca">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/prato-e-faca.jpg" alt="Prato e faca" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/prato.jpg" alt="Prato e faca">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Prato e faca</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -354,9 +354,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
       </div>
     </article>
-    <article class="instrumento" id="cavaquinho" data-tipo="nao" data-man="samba">
+    <article class="instrumento nao samba" id="cavaquinho">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/cavaquinho.jpg" alt="Cavaquinho" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/cavaquinho.jpg" alt="Cavaquinho">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Cavaquinho</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -372,9 +372,9 @@
         <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
       </div>
     </article>
-    <article class="instrumento" id="viola" data-tipo="nao" data-man="samba">
+    <article class="instrumento nao samba" id="viola">
       <figure class="instrumento__imagem">
-        <img src="../imagens/instrumentos/viola.jpg" alt="Viola" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <img src="../imagens/instrumentos/viola.jpg" alt="Viola">
         <span class="instrumento__placeholder" aria-hidden="true">◉<small>Viola</small></span>
       </figure>
       <div class="instrumento__corpo">
@@ -392,7 +392,7 @@
     </article>
   </section>
 
-  <p class="acervo-vazio" id="vazio" hidden>Nenhum instrumento encontrado para esse filtro.</p>
+  <p class="acervo-vazio oculto" id="vazio">Nenhum instrumento encontrado para esse filtro.</p>
 
   <div class="page-navigation"><a href="../index.html#instrumentos" class="btn btn--dark">Voltar à página inicial</a><a href="sobre-mim.html" class="btn btn--primary">Sobre Mim</a></div>
 </div></main>
@@ -403,32 +403,36 @@
 </div><div class="footer__bottom"><p>© 2026 Percussão Afro. Todos os direitos reservados.</p></div></footer>
 
 <script>
-  (function () {
-    var botoes = document.querySelectorAll('.filtro');
-    var itens = document.querySelectorAll('.instrumento');
-    var contagem = document.getElementById('contagem');
-    var vazio = document.getElementById('vazio');
+  function filtrar() {
+    var itens = document.getElementsByClassName('instrumento');
+    var total = 0;
 
-    function aplicar(filtro) {
-      var total = 0;
-      itens.forEach(function (el) {
-        var ok = filtro === 'todos' || el.dataset.tipo === filtro || el.dataset.man.split(' ').indexOf(filtro) !== -1;
-        el.hidden = !ok;
-        if (ok) total++;
-      });
-      contagem.textContent = total + (total === 1 ? ' instrumento' : ' instrumentos');
-      vazio.hidden = total !== 0;
+    for (var i = 0; i < itens.length; i++) {
+      var classes = itens[i].className.replace(' oculto', '');
+      var lista = ' ' + classes + ' ';
+
+      if (filtro.value == 'todos' || lista.indexOf(' ' + filtro.value + ' ') != -1) {
+        itens[i].className = classes;
+        total++;
+      } else {
+        itens[i].className = classes + ' oculto';
+      }
     }
 
-    botoes.forEach(function (b) {
-      b.addEventListener('click', function () {
-        botoes.forEach(function (x) { x.classList.remove('is-active'); });
-        b.classList.add('is-active');
-        aplicar(b.dataset.filtro);
-      });
-    });
-    aplicar('todos');
-  })();
+    if (total == 1) {
+      contagem.innerHTML = '1 instrumento';
+    } else {
+      contagem.innerHTML = total + ' instrumentos';
+    }
+
+    if (total == 0) {
+      vazio.className = 'acervo-vazio';
+    } else {
+      vazio.className = 'acervo-vazio oculto';
+    }
+  }
+
+  filtrar();
 </script>
 </body>
 </html>
