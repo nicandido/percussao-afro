@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Percussão Afro-Brasileira | Acervo Digital</title>
-  <meta name="description" content="Projeto individual sobre a importância dos instrumentos de percussão na cultura afro-brasileira." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
@@ -22,12 +21,10 @@
 
       <nav class="nav" aria-label="Menu principal">
         <ul class="nav__list">
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#manifestacoes">Manifestações</a></li>
-          <li><a href="#instrumentos">Instrumentos</a></li>
-          <li><a href="#projeto">Projeto</a></li>
-          <li><a href="pages/login.html" class="btn btn--outline btn--sm">Login</a></li>
-          <li><a href="pages/cadastro.html" class="btn btn--primary btn--sm">Cadastrar</a></li>
+          <li><a href="paginas/sobre-mim.html">Sobre Mim</a></li>
+          <li><a href="#sobre">Sobre o projeto</a></li>
+          <li><a href="paginas/login.html" class="btn btn--ghost btn--sm">Login</a></li>
+          <li><a href="paginas/cadastro.html" class="btn btn--primary btn--sm">Cadastrar</a></li>
         </ul>
       </nav>
     </div>
@@ -80,21 +77,6 @@
             HTML, CSS, JavaScript, Node.js, MySQL e Linux adquiridos no semestre.
           </p>
         </div>
-
-        <aside class="about__aside">
-          <div class="stat">
-            <span class="stat__number">4</span>
-            <span class="stat__label">Manifestações centrais</span>
-          </div>
-          <div class="stat">
-            <span class="stat__number">+20</span>
-            <span class="stat__label">Instrumentos catalogados</span>
-          </div>
-          <div class="stat">
-            <span class="stat__number">3</span>
-            <span class="stat__label">Entidades no banco</span>
-          </div>
-        </aside>
       </div>
     </div>
   </section>
@@ -113,9 +95,9 @@
       <div class="grid grid--4">
 
         <!-- Card Samba -->
-        <article class="card card--manifest" style="--bg: url('../imagens/samba.jpg');">
+        <a class="manifestacao-link" href="paginas/samba.html" aria-label="Conheça a manifestação Samba">
+          <article class="card card--manifest" style="background-image: url('imagens/samba.jpg');">
           <div class="card__overlay"></div>
-          <div class="card__emoji-fallback">🥁</div>
           <div class="card__content">
             <h3 class="card__title">Samba</h3>
             <p class="card__text">
@@ -123,11 +105,12 @@
             </p>
           </div>
         </article>
+        </a>
 
         <!-- Card Capoeira -->
-        <article class="card card--manifest" style="--bg: url('../imagens/capoeira.jpg');">
+        <a class="manifestacao-link" href="paginas/capoeira.html" aria-label="Conheça a manifestação Capoeira">
+          <article class="card card--manifest" style="background-image: url('imagens/capoeira.jpg');">
           <div class="card__overlay"></div>
-          <div class="card__emoji-fallback">🥋</div>
           <div class="card__content">
             <h3 class="card__title">Capoeira</h3>
             <p class="card__text">
@@ -135,11 +118,12 @@
             </p>
           </div>
         </article>
+        </a>
 
         <!-- Card Maracatu -->
-        <article class="card card--manifest" style="--bg: url('../imagens/maracatu.jpg');">
+        <a class="manifestacao-link" href="paginas/maracatu.html" aria-label="Conheça a manifestação Maracatu">
+          <article class="card card--manifest" style="background-image: url('imagens/maracatu.jpg');">
           <div class="card__overlay"></div>
-          <div class="card__emoji-fallback">🌿</div>
           <div class="card__content">
             <h3 class="card__title">Maracatu</h3>
             <p class="card__text">
@@ -147,11 +131,12 @@
             </p>
           </div>
         </article>
+        </a>
 
         <!-- Card Umbanda -->
-        <article class="card card--manifest" style="--bg: url('../imagens/umbanda.jpg');">
+        <a class="manifestacao-link" href="paginas/umbanda.html" aria-label="Conheça a manifestação Umbanda">
+          <article class="card card--manifest" style="background-image: url('imagens/umbanda.jpg');">
           <div class="card__overlay"></div>
-          <div class="card__emoji-fallback">🕯️</div>
           <div class="card__content">
             <h3 class="card__title">Umbanda</h3>
             <p class="card__text">
@@ -159,6 +144,7 @@
             </p>
           </div>
         </article>
+        </a>
 
       </div>
     </div>
@@ -215,24 +201,22 @@
     </div>
   </section>
 
-  <!-- PROJETO / CTA -->
+  <!-- Acervo -->
   <section id="projeto" class="section section--accent">
     <div class="container cta">
       <div>
-        <h2 class="cta__title">Faça parte do acervo</h2>
+        <h2 class="cta__title">Conheça o acervo</h2>
         <p class="cta__text">
-          Cadastre instrumentos, consulte manifestações e explore o dashboard
-          com indicadores culturais do projeto.
+          Explore os instrumentos presentes nas manifestações culturais e conheça suas características.
         </p>
       </div>
       <div class="cta__actions">
-        <a href="pages/cadastro.html" class="btn btn--dark">Cadastrar instrumento</a>
-        <a href="pages/consulta.html" class="btn btn--outline-dark">Consultar acervo</a>
+        <a href="paginas/acervo.html" class="btn btn--outline-dark">Consultar acervo</a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- Footer -->
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
@@ -243,15 +227,16 @@
 
       <div class="footer__links">
         <h4>Navegação</h4>
-        <a href="#sobre">Sobre</a>
+        <a href="paginas/sobre-mim.html">Sobre Mim</a>
+        <a href="#sobre">Sobre o projeto</a>
         <a href="#manifestacoes">Manifestações</a>
         <a href="#instrumentos">Instrumentos</a>
       </div>
 
       <div class="footer__links">
         <h4>Projeto</h4>
-        <a href="pages/cadastro.html">Cadastro</a>
-        <a href="pages/consulta.html">Consulta</a>
+        <a href="paginas/cadastro.html">Cadastro</a>
+        <a href="paginas/acervo.html">Consultar acervo</a>
         <a href="#" target="_blank" rel="noopener">GitHub</a>
       </div>
 
@@ -266,6 +251,5 @@
       <p>© 2026 Percussão Afro. Todos os direitos reservados.</p>
     </div>
   </footer>
-
 </body>
 </html>
