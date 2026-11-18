@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/acervo.css">
 </head>
 <body>
 <header class="header"><div class="container header__inner">
@@ -17,12 +18,417 @@
   </ul></nav>
 </div></header>
 <main class="content-page"><div class="container">
-  <header class="content-page__intro"><span class="content-page__eyebrow">Catálogo cultural</span><h1 class="content-page__title">Instrumentos do Acervo</h1><p class="content-page__lead">Conheça os instrumentos citados no Percussão Afro e algumas de suas características.</p></header>
-  <section class="content-block"><h2>Sobre o catálogo</h2><p>Esta página reúne os instrumentos que já aparecem na página inicial do projeto. O catálogo poderá ser ampliado conforme a pesquisa cultural avançar e, futuramente, os registros poderão ser carregados pela API.</p></section><section class="instrument-grid" aria-label="Instrumentos do acervo"><article class="card card--instrument"><span class="card__badge">Cordas e percussão</span><h2 class="card__title">Berimbau</h2><p class="card__text">Arco musical associado à capoeira. Seus toques participam da condução do jogo e da organização musical da roda.</p></article><article class="card card--instrument"><span class="card__badge">Membranofone</span><h2 class="card__title">Atabaque</h2><p class="card__text">Tambor presente em diferentes contextos musicais e religiosos afro-brasileiros. Seu uso, função e execução variam conforme a manifestação e a comunidade.</p></article><article class="card card--instrument"><span class="card__badge">Percussão</span><h2 class="card__title">Pandeiro</h2><p class="card__text">Instrumento de armação com membrana e platinelas, utilizado em diferentes gêneros e manifestações, incluindo samba e capoeira.</p></article><article class="card card--instrument"><span class="card__badge">Idiofone</span><h2 class="card__title">Agogô</h2><p class="card__text">Instrumento formado por campânulas metálicas, tocadas com uma baqueta. Pode marcar padrões rítmicos em diferentes tradições.</p></article><article class="card card--instrument"><span class="card__badge">Membranofone de fricção</span><h2 class="card__title">Cuíca</h2><p class="card__text">Tambor de fricção cujo som característico é produzido pelo atrito de uma vareta ligada à membrana. É muito associado ao samba.</p></article><article class="card card--instrument"><span class="card__badge">Membranofone</span><h2 class="card__title">Alfaia</h2><p class="card__text">Tambor de corpo cilíndrico utilizado no Maracatu Nação, integrando o batuque que conduz o baque.</p></article></section><div class="page-navigation"><a href="../index.html#instrumentos" class="btn btn--dark">Voltar à página inicial</a><a href="sobre-mim.html" class="btn btn--primary">Sobre Mim</a></div>
+  <header class="content-page__intro"><span class="content-page__eyebrow">Catálogo cultural</span><h1 class="content-page__title">Instrumentos do Acervo</h1><p class="content-page__lead">Conheça os instrumentos de percussão presentes no samba, na capoeira, no maracatu e na umbanda, suas funções e características.</p></header>
+
+  <section class="content-block"><h2>Sobre o catálogo</h2>
+    <p>O acervo reúne os instrumentos de percussão das manifestações apresentadas no projeto. Alguns instrumentos que não são de percussão, mas são muito importantes para essas manifestações, também foram incluídos e aparecem identificados como <strong>"Não é percussão"</strong>. As práticas e o uso de cada instrumento podem variar entre comunidades, grupos e terreiros.</p>
+  </section>
+
+  <div class="acervo-filtros" role="group" aria-label="Filtrar instrumentos">
+    <button type="button" class="filtro is-active" data-filtro="todos">Todos</button><button type="button" class="filtro" data-filtro="perc">Percussão</button><button type="button" class="filtro" data-filtro="nao">Não é percussão</button><button type="button" class="filtro" data-filtro="samba">Samba</button><button type="button" class="filtro" data-filtro="capoeira">Capoeira</button><button type="button" class="filtro" data-filtro="maracatu">Maracatu</button><button type="button" class="filtro" data-filtro="umbanda">Umbanda</button>
+  </div>
+  <p class="acervo-contagem" id="contagem" aria-live="polite"></p>
+
+  <section class="acervo-lista" aria-label="Instrumentos do acervo">
+    <article class="instrumento" id="atabaque" data-tipo="perc" data-man="capoeira umbanda">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/atabaque.jpg" alt="Atabaque" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Atabaque</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Atabaque</h2>
+        <p class="instrumento__classe">Membranofone</p>
+        <p class="instrumento__desc">Tambor alto, de corpo alongado e uma única membrana, feito de madeira e couro e afinado por cunhas ou cordas. Costuma aparecer em conjuntos de três tamanhos: rum (grave), rumpi (médio) e lê (agudo).</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Sustenta a base rítmica das rodas e das giras, acompanhando cantos e pontos e organizando a parte musical da cerimônia ou do jogo.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Tocado com as mãos ou com varetas (aguidavis), conforme a tradição de cada grupo ou casa.</dd></div>
+          <div><dt>Observação</dt><dd>Seu uso, função e execução variam conforme a manifestação e a comunidade.</dd></div>
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="capoeira.html">Capoeira</a><a class="chip chip--link" href="umbanda.html">Umbanda</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="berimbau" data-tipo="nao" data-man="capoeira">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/berimbau.jpg" alt="Berimbau" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Berimbau</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge card__badge--nao">Não é percussão</span>
+        <h2 class="instrumento__nome">Berimbau</h2>
+        <p class="instrumento__classe">Cordofone percutido (arco musical)</p>
+        <p class="instrumento__desc">Arco de madeira com um fio de arame esticado e uma cabaça que funciona como caixa de ressonância. Não é um instrumento de percussão no sentido estrito, mas o som nasce da percussão da corda com uma vareta; por isso é considerado percussivo e essencial ao acervo.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Comanda a roda de capoeira: seus toques indicam o estilo, o ritmo e o andamento do jogo. Costuma haver três berimbaus: gunga (grave), médio e viola (agudo).</dd></div>
+          <div><dt>Como é tocado</dt><dd>A vareta bate na corda enquanto a outra mão segura o dobrão (pedra ou moeda) e o caxixi, variando as notas.</dd></div>
+          <div><dt>Observação</dt><dd>Faz parte de uma família de arcos musicais de origem africana.</dd></div>
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="capoeira.html">Capoeira</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="caxixi" data-tipo="perc" data-man="capoeira">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/caxixi.jpg" alt="Caxixi" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Caxixi</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Caxixi</h2>
+        <p class="instrumento__classe">Idiofone (chocalho)</p>
+        <p class="instrumento__desc">Pequeno chocalho de cestaria trançada, com base de cabaça ou de outro material, preenchido com sementes ou miçangas.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Acompanha o berimbau, acrescentando um chiado rítmico que marca e preenche os toques.</dd></div>
+          <div><dt>Como é tocado</dt><dd>É seguro na mesma mão que segura a vareta ou o dobrão e sacudido a cada batida.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="capoeira.html">Capoeira</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="pandeiro" data-tipo="perc" data-man="samba capoeira">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/pandeiro.jpg" alt="Pandeiro" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Pandeiro</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Pandeiro</h2>
+        <p class="instrumento__classe">Membranofone com platinelas</p>
+        <p class="instrumento__desc">Instrumento de armação circular com uma membrana e pequenos discos metálicos (platinelas) encaixados no aro.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Marca o ritmo com sonoridade brilhante. Está presente em rodas de samba, na capoeira e em outros gêneros brasileiros.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Tocado com os dedos, a palma da mão e o polegar, combinando batidas, abafamentos e o balanço das platinelas.</dd></div>
+          <div><dt>Observação</dt><dd>Na Capoeira Regional, aparece em dupla ao lado de um berimbau.</dd></div>
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a><a class="chip chip--link" href="capoeira.html">Capoeira</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="agogo" data-tipo="perc" data-man="capoeira samba umbanda maracatu">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/agogo.jpg" alt="Agogô" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Agogô</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Agogô</h2>
+        <p class="instrumento__classe">Idiofone (sinos metálicos)</p>
+        <p class="instrumento__desc">Instrumento formado por duas ou mais campânulas de metal unidas por uma haste, cada uma com uma altura de som diferente.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Marca padrões rítmicos agudos e claros que servem de guia aos demais instrumentos. Aparece em baterias de capoeira, de escolas de samba e em contextos religiosos afro-brasileiros.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Tocado com uma baqueta de madeira ou metal, golpeando as campânulas.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="capoeira.html">Capoeira</a><a class="chip chip--link" href="samba.html">Samba</a><a class="chip chip--link" href="umbanda.html">Umbanda</a><a class="chip chip--link" href="maracatu.html">Maracatu</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="gongue" data-tipo="perc" data-man="maracatu">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/gongue.jpg" alt="Gonguê" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Gonguê</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Gonguê</h2>
+        <p class="instrumento__classe">Idiofone (sino duplo)</p>
+        <p class="instrumento__desc">Sino de ferro, geralmente duplo, usado no maracatu de baque virado.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Conduz uma marcação regular sobre a qual se apoiam as alfaias, caixas e demais instrumentos, ajudando a sustentar o baque.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Percutido com uma baqueta de metal ou madeira.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="maracatu.html">Maracatu</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="cuica" data-tipo="perc" data-man="samba">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/cuica.jpg" alt="Cuíca" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Cuíca</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Cuíca</h2>
+        <p class="instrumento__classe">Membranofone de fricção</p>
+        <p class="instrumento__desc">Tambor sem aro de ressonância externa, com uma vareta fina presa à parte interna da membrana. Tem raízes em instrumentos de fricção africanos.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Produz um som que lembra um &quot;gemido&quot; ou uma voz, muito característico das baterias de samba.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Uma mão friciona a vareta com um pano úmido por dentro, enquanto a outra pressiona a pele por fora para mudar a altura do som.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="surdo" data-tipo="perc" data-man="samba">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/surdo.jpg" alt="Surdo" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Surdo</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Surdo</h2>
+        <p class="instrumento__classe">Membranofone</p>
+        <p class="instrumento__desc">Tambor grande e de som grave, de corpo cilíndrico e duas membranas.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>É o coração da marcação do samba, definindo a pulsação. Costuma-se usar surdos de primeira, segunda e terceira, cada um com um papel na marcação e no contracanto.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Tocado com uma baqueta de cabeça macia e, às vezes, com a mão livre para abafar a pele.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="tanta" data-tipo="perc" data-man="samba">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/tanta.jpg" alt="Tantã" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Tantã</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Tantã</h2>
+        <p class="instrumento__classe">Membranofone</p>
+        <p class="instrumento__desc">Tambor cilíndrico alongado, de som grave a médio, muito comum em rodas de samba e pagode.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Cria uma base rítmica envolvente, complementando o surdo e os demais instrumentos de marcação.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Tocado com as mãos, geralmente apoiado no colo ou na lateral do corpo.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="repique" data-tipo="perc" data-man="samba">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/repique.jpg" alt="Repique" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Repique</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Repique</h2>
+        <p class="instrumento__classe">Membranofone</p>
+        <p class="instrumento__desc">Tambor de som agudo e seco, de corpo cilíndrico, usado em baterias de escola e em rodas de samba (nesse caso, o repique de mão).</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Faz chamadas, variações e comandos rítmicos, sinalizando mudanças para o conjunto.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Tocado com baqueta e uma das mãos, ou apenas com as mãos, conforme o contexto.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="tamborim" data-tipo="perc" data-man="samba">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/tamborim.jpg" alt="Tamborim" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Tamborim</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Tamborim</h2>
+        <p class="instrumento__classe">Membranofone</p>
+        <p class="instrumento__desc">Pequeno tambor sem platinelas, de aro estreito e uma única membrana.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Desenha os rápidos padrões agudos que dão brilho e movimento à bateria de samba.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Segurado com uma mão e tocado com uma baqueta fina, com giros do pulso e abafamentos.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="reco-reco" data-tipo="perc" data-man="samba">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/reco-reco.jpg" alt="Reco-reco" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Reco-reco</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Reco-reco</h2>
+        <p class="instrumento__classe">Idiofone (raspador)</p>
+        <p class="instrumento__desc">Instrumento com ranhuras na superfície, feito tradicionalmente de bambu ou madeira e hoje também de metal.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Acrescenta uma textura de raspagem que preenche o ritmo do samba.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Raspado com uma vareta ou com um pequeno rastelo, em movimentos curtos e contínuos.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="alfaia" data-tipo="perc" data-man="maracatu">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/alfaia.jpg" alt="Alfaia" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Alfaia</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Alfaia</h2>
+        <p class="instrumento__classe">Membranofone</p>
+        <p class="instrumento__desc">Tambor grave de corpo cilíndrico em madeira, com membranas de couro e afinação por cordas ou tensores. É o instrumento mais marcante do Maracatu Nação.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Integra o batuque que conduz o baque, o ritmo do cortejo, e acompanha as toadas.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Tocada com baquetas de madeira, geralmente com a alfaia pendurada ao ombro.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="maracatu.html">Maracatu</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="caixa-tarol" data-tipo="perc" data-man="maracatu">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/caixa-tarol.jpg" alt="Caixa e tarol" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Caixa e tarol</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Caixa e tarol</h2>
+        <p class="instrumento__classe">Membranofone com esteira</p>
+        <p class="instrumento__desc">Tambores de pele fina com esteira (fios que vibram junto à membrana). O tarol costuma ser mais agudo e de menor diâmetro.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Fazem os rulos e as figuras rítmicas rápidas que preenchem e dão aceleração ao baque.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Tocados com duas baquetas leves.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="maracatu.html">Maracatu</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="mineiro" data-tipo="perc" data-man="maracatu">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/mineiro.jpg" alt="Mineiro (ganzá)" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Mineiro (ganzá)</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Mineiro (ganzá)</h2>
+        <p class="instrumento__classe">Idiofone (chocalho)</p>
+        <p class="instrumento__desc">Chocalho cilíndrico, geralmente de metal, preenchido com grãos ou miçangas.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Mantém um fluxo contínuo de som que liga os demais instrumentos do batuque.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Sacudido com movimentos regulares de ida e vinda.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="maracatu.html">Maracatu</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="abe" data-tipo="perc" data-man="maracatu umbanda">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/abe.jpg" alt="Abê (xequerê)" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Abê (xequerê)</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Abê (xequerê)</h2>
+        <p class="instrumento__classe">Idiofone</p>
+        <p class="instrumento__desc">Cabaça envolta por uma rede de contas ou sementes. Recebe nomes diferentes conforme a tradição: abê no maracatu, xequerê em outros contextos afro-brasileiros.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Produz um som de chocalho com um toque de batida, enriquecendo a textura do conjunto.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Sacudido e golpeado na base com a palma da mão, fazendo as contas girarem ao redor da cabaça.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="maracatu.html">Maracatu</a><a class="chip chip--link" href="umbanda.html">Umbanda</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="adja" data-tipo="perc" data-man="umbanda">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/adja.jpg" alt="Adjá" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Adjá</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Adjá</h2>
+        <p class="instrumento__classe">Idiofone (sineta)</p>
+        <p class="instrumento__desc">Sineta de metal, de uma ou mais campânulas, usada em religiões de matriz africana.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Seu som aparece em contextos rituais, e o significado e o uso variam conforme a casa e os fundamentos de cada tradição.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Agitada com a mão, sem baqueta.</dd></div>
+          <div><dt>Observação</dt><dd>Respeite os fundamentos de cada terreiro ao tratar do seu uso.</dd></div>
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="umbanda.html">Umbanda</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="prato-e-faca" data-tipo="perc" data-man="samba">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/prato-e-faca.jpg" alt="Prato e faca" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Prato e faca</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge">Percussão</span>
+        <h2 class="instrumento__nome">Prato e faca</h2>
+        <p class="instrumento__classe">Idiofone (raspador/percutido)</p>
+        <p class="instrumento__desc">Instrumento improvisado, usado no Samba de Roda do Recôncavo Baiano: um prato de louça ou metal e uma faca.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Produz um som metálico e raspado que marca o ritmo, convivendo com palmas, canto e dança na roda.</dd></div>
+          <div><dt>Como é tocado</dt><dd>A faca é raspada ou batida sobre o prato, que é segurado com uma das mãos.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="cavaquinho" data-tipo="nao" data-man="samba">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/cavaquinho.jpg" alt="Cavaquinho" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Cavaquinho</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge card__badge--nao">Não é percussão</span>
+        <h2 class="instrumento__nome">Cavaquinho</h2>
+        <p class="instrumento__classe">Cordofone</p>
+        <p class="instrumento__desc">Pequeno instrumento de quatro cordas dedilhadas ou palhetadas. Não é percussão, mas é fundamental ao samba.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Faz a harmonia e uma condução rítmica rápida e brilhante, que se une à percussão.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Tocado com palheta, em ritmos marcados e acordes.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
+      </div>
+    </article>
+    <article class="instrumento" id="viola" data-tipo="nao" data-man="samba">
+      <figure class="instrumento__imagem">
+        <img src="../imagens/instrumentos/viola.jpg" alt="Viola" loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+        <span class="instrumento__placeholder" aria-hidden="true">◉<small>Viola</small></span>
+      </figure>
+      <div class="instrumento__corpo">
+        <span class="card__badge card__badge--nao">Não é percussão</span>
+        <h2 class="instrumento__nome">Viola</h2>
+        <p class="instrumento__classe">Cordofone</p>
+        <p class="instrumento__desc">Instrumento de cordas ligado ao Samba de Roda do Recôncavo Baiano. Não é percussão, mas aparece junto aos instrumentos percussivos.</p>
+        <dl class="instrumento__dados">
+          <div><dt>Função</dt><dd>Acompanha o canto e a dança com melodia e harmonia, ao lado de palmas, pandeiro e outros instrumentos.</dd></div>
+          <div><dt>Como é tocado</dt><dd>Dedilhada ou tocada com ritmo marcado, de acordo com o grupo e a tradição.</dd></div>
+          
+        </dl>
+        <div class="instrumento__mans"><span>Presente em:</span><a class="chip chip--link" href="samba.html">Samba</a></div>
+      </div>
+    </article>
+  </section>
+
+  <p class="acervo-vazio" id="vazio" hidden>Nenhum instrumento encontrado para esse filtro.</p>
+
+  <div class="page-navigation"><a href="../index.html#instrumentos" class="btn btn--dark">Voltar à página inicial</a><a href="sobre-mim.html" class="btn btn--primary">Sobre Mim</a></div>
 </div></main>
 <footer class="footer"><div class="container footer__inner">
   <div class="footer__brand"><span class="logo__icon">◉</span><span class="logo__text">Percussão<em>Afro</em></span><p class="footer__tagline">Projeto Individual · SPTECH · 2026</p></div>
   <div class="footer__links"><h4>Navegação</h4><a href="../index.html">Início</a><a href="sobre-mim.html">Sobre Mim</a><a href="acervo.html">Consultar acervo</a></div>
   <div class="footer__credit"><p>Desenvolvido por <b>Nicollas Martins Candido</b><br><em>Ogã e umbandista: a percussão como vivência.</em></p></div>
 </div><div class="footer__bottom"><p>© 2026 Percussão Afro. Todos os direitos reservados.</p></div></footer>
-</body></html>
+
+<script>
+  (function () {
+    var botoes = document.querySelectorAll('.filtro');
+    var itens = document.querySelectorAll('.instrumento');
+    var contagem = document.getElementById('contagem');
+    var vazio = document.getElementById('vazio');
+
+    function aplicar(filtro) {
+      var total = 0;
+      itens.forEach(function (el) {
+        var ok = filtro === 'todos' || el.dataset.tipo === filtro || el.dataset.man.split(' ').indexOf(filtro) !== -1;
+        el.hidden = !ok;
+        if (ok) total++;
+      });
+      contagem.textContent = total + (total === 1 ? ' instrumento' : ' instrumentos');
+      vazio.hidden = total !== 0;
+    }
+
+    botoes.forEach(function (b) {
+      b.addEventListener('click', function () {
+        botoes.forEach(function (x) { x.classList.remove('is-active'); });
+        b.classList.add('is-active');
+        aplicar(b.dataset.filtro);
+      });
+    });
+    aplicar('todos');
+  })();
+</script>
+</body>
+</html>
