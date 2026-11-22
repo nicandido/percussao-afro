@@ -1,158 +1,130 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AquaTech | Login</title>
-
-    <script src="./js/sessao.js"></script>
-
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Percussão Afro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/autenticacao.css" />
 </head>
-
-<body>
-
-    <!--Header-->
-
-    <div class="header">
-        <div class="container">
-            <h1 class="titulo">AquaTech</h1>
-            <ul class="navbar">
-                <li>
-                    <a href="index.html">Inicial</a>
-                </li>
-                <li>
-                    <a href="simulador.html">Simulador</a>
-                </li>
-                <li>|</li>
-                <li class="agora">
-                    <a href="#">Login</a>
-                </li>
-                <li>
-                    <a href="cadastro.html">Cadastro</a>
-                </li>
-            </ul>
-        </div>
+<body class="auth-page">
+  <header class="header">
+    <div class="container header__inner">
+      <a href="../index.html" class="logo">
+        <span class="logo__icon">◉</span>
+        <span class="logo__text">Percussão<em>Afro</em></span>
+      </a>
+      <a href="../index.html" class="auth__back">Voltar ao início</a>
     </div>
+  </header>
 
+  <main class="auth">
+    <section class="auth__visual">
+      <div class="auth__visual-content">
+        <span class="auth__eyebrow">Acervo Digital</span>
+        <h1 class="auth__visual-title">A memória também se constrói <span>no ritmo.</span></h1>
+        <p>Explore histórias, manifestações e instrumentos que atravessam gerações da cultura afro-brasileira.</p>
+        <div class="auth__ornament"><span>◉</span><i></i><span>◉</span></div>
+      </div>
+      <span class="auth__visual-note">Cultura · Ancestralidade · Memória</span>
+    </section>
 
-    <div class="login">
-        <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
-            </div>
+    <section class="auth__form-area">
+      <div class="auth__form-wrap">
+        <div class="auth__mobile-logo">
+          <span class="logo__icon">◉</span>
+          <span class="logo__text">Percussão<em>Afro</em></span>
         </div>
-        <div class="container">
-            <div class="card card-login">
-                <h2>Olá de volta!</h2>
-                <div class="formulario">
-                    <div class="campo">
-                        <span>E-mail:</span>
-                        <input id="email_input" type="text" placeholder="Login">
-                    </div>
-                    <div class="campo">
-                        <span>Senha:</span>
-                        <input id="senha_input" type="password" placeholder="******">
-                    </div>
-                    <button class="botao" onclick="entrar()">Entrar</button>
-                </div>
+        <span class="auth__eyebrow">Bem-vindo de volta</span>
+        <h2 class="auth__title">Acesse sua conta</h2>
+        <p class="auth__description">Entre para continuar explorando o nosso acervo.</p>
 
-                <div id="div_aguardar" class="loading-div">
-                    <img src="./assets/circle-loading.gif" id="loading-gif">
-                </div>
+        <form class="auth-form" id="formLogin" action="#" method="post">
+          <div id="mensagem" class="auth__mensagem" role="alert"></div>
+          <div class="form__group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" autocomplete="email" required />
+          </div>
+          <div class="form__group">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="current-password" required />
+          </div>
+          <div class="form__options">
+            <label class="form__remember"><input type="checkbox" name="lembrar" /> <span>Manter conectado</span></label>
+            <a href="#" class="form__link">Esqueceu a senha?</a>
+          </div>
+          <button type="submit" class="auth__submit" id="botaoEntrar">Realizar Login<span>→</span></button>
+        </form>
 
-                <div id="div_erros_login"></div>
-            </div>
-        </div>
-    </div>
+        <p class="auth__switch">Ainda não possui uma conta? <a href="cadastro.html">Cadastre-se</a></p>
+        <a href="../index.html" class="auth__home-link">← Voltar para a página inicial</a>
+      </div>
+    </section>
+  </main>
 
-    <!--footer inicio-->
-    <div class="footer">
-        <div class="container">
-            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023-2026</h4>
-        </div>
-    </div>
-    <!--footer fim-->
+  <footer class="auth__footer">
+    <p>© 2026 Percussão Afro. Todos os direitos reservados.</p>
+  </footer>
 
-</body>
+  <script>
+    var formLogin = document.getElementById("formLogin");
+    var caixaMensagem = document.getElementById("mensagem");
+    var botaoEntrar = document.getElementById("botaoEntrar");
 
-</html>
+    function mostrarMensagem(texto, tipo) {
+      caixaMensagem.textContent = texto;
+      caixaMensagem.className = "auth__mensagem " + tipo;
+    }
 
-<script>
+    // Se o usuário veio do quiz/dashboard, volta para lá. Só aceita páginas internas de /paginas/.
+    function destinoAposLogin() {
+      var destino = new URLSearchParams(window.location.search).get("destino");
+      if (destino && /^\/paginas\/[a-z0-9-]+\.html$/i.test(destino)) {
+        return destino;
+      }
+      return "/index.html";
+    }
 
+    formLogin.addEventListener("submit", function (evento) {
+      evento.preventDefault(); // o navegador já validou os campos obrigatórios
+      caixaMensagem.className = "auth__mensagem";
+      botaoEntrar.disabled = true;
 
-    function entrar() {
-        aguardar();
-
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
-
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
-            return false;
-        }
-        else {
-            setInterval(sumirMensagem, 5000)
-        }
-
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
-
-        fetch("/usuarios/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
-
-                    setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
-                    }, 1000); // apenas para exibir o loading
-
-                });
-
-            } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    finalizarAguardar(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
+      fetch("/usuarios/autenticar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          emailServer: document.getElementById("email").value.trim(),
+          senhaServer: document.getElementById("senha").value
         })
+      }).then(function (resposta) {
+        if (resposta.ok) {
+          return resposta.json().then(function (json) {
+            sessionStorage.ID_USUARIO = json.id;
+            sessionStorage.NOME_USUARIO = json.nome;
+            sessionStorage.EMAIL_USUARIO = json.email;
+            sessionStorage.TOKEN_USUARIO = json.token;
+            window.location.href = destinoAposLogin();
+          });
+        }
 
-        return false;
-    }
-
-    function sumirMensagem() {
-        cardErro.style.display = "none"
-    }
-
-</script>
+        botaoEntrar.disabled = false;
+        if (resposta.status >= 500) {
+          mostrarMensagem("Não foi possível entrar agora. Tente novamente em instantes.", "erro");
+          return;
+        }
+        return resposta.text().then(function (texto) {
+          mostrarMensagem(texto, "erro");
+        });
+      }).catch(function (erro) {
+        console.log(erro);
+        botaoEntrar.disabled = false;
+        mostrarMensagem("Não foi possível conectar ao servidor. Tente novamente.", "erro");
+      });
+    });
+  </script>
+</body>
+</html>
