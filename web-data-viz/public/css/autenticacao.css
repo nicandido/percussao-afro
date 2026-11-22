@@ -435,33 +435,3 @@
     align-items: flex-start;
   }
 }
-
-/* Mensagens de erro/sucesso dos formulários (login e cadastro) */
-.auth__mensagem {
-  display: none;
-  padding: 12px 14px;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  font-size: .82rem;
-  line-height: 1.6;
-}
-
-.auth__mensagem.erro {
-  display: block;
-  color: #ffb4a8;
-  background: rgba(198, 40, 40, .14);
-  border-color: rgba(255, 140, 120, .35);
-}
-
-.auth__mensagem.sucesso {
-  display: block;
-  color: #b9e3b1;
-  background: rgba(74, 107, 58, .22);
-  border-color: rgba(120, 190, 110, .35);
-}
-
-.auth__submit:disabled {
-  opacity: .6;
-  cursor: wait;
-  transform: none;
-}
