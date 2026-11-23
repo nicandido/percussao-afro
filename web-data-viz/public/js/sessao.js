@@ -1,10 +1,3 @@
-// Controle de sessão do site Percussão Afro.
-// Usado por: login, cadastro, quiz, dashboard e menu do index.
-//
-// Ao fazer login, o login.html guarda no sessionStorage:
-//   ID_USUARIO, NOME_USUARIO, EMAIL_USUARIO e TOKEN_USUARIO
-// O token é enviado à API em todas as rotas protegidas (/quiz/...).
-
 var PAGINA_LOGIN = "/paginas/login.html";
 
 function estaLogado() {
