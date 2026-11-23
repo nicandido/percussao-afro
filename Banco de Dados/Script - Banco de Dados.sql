@@ -1,7 +1,9 @@
+-- CRIANDO BANCO DE DADOS E SELECIONANDO ELE
 CREATE DATABASE percussao_afro;
 
 USE percussao_afro;
 
+-- CRIANDO TABELAS
 CREATE TABLE usuario(
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100)NOT NULL,
@@ -27,7 +29,8 @@ CREATE TABLE tentativas_quiz(
     acertos INT NOT NULL,
     erros INT NOT NULL,
     dtTentativa DATETIME DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_tentativa_usuario FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario)
+    CONSTRAINT fk_tentativa_usuario FOREIGN KEY (fkUsuario) 
+        REFERENCES usuario(idUsuario)
 );
     
 CREATE TABLE resposta_quiz(
@@ -36,11 +39,15 @@ CREATE TABLE resposta_quiz(
     fkPergunta INT NOT NULL,
     alternativaEscolhida CHAR(1) NOT NULL,
     correta TINYINT(1) NOT NULL,
-    CONSTRAINT fk_resposta_tentativa FOREIGN KEY (fkTentativa) REFERENCES tentativas_quiz(idTentativa),
-    CONSTRAINT fk_resposta_pergunta FOREIGN KEY (fkPergunta) REFERENCES pergunta(idPergunta),
+    CONSTRAINT fk_resposta_tentativa FOREIGN KEY (fkTentativa) 
+        REFERENCES tentativas_quiz(idTentativa),
+    CONSTRAINT fk_resposta_pergunta FOREIGN KEY (fkPergunta) 
+        REFERENCES pergunta(idPergunta),
     CONSTRAINT uq_tentativa_pergunta UNIQUE (fkTentativa, fkPergunta)
 );
 
+
+-- INSERTS
 INSERT INTO pergunta (enunciado, alternativaA, alternativaB, alternativaC, alternativaD, respostaCorreta, tema) VALUES
 ('Qual instrumento de cordas percutidas é considerado o coração e o comandante da roda de capoeira?',
  'Atabaque', 'Berimbau', 'Cavaquinho', 'Alfaia', 'B', 'capoeira'),
@@ -91,3 +98,35 @@ INSERT INTO pergunta (enunciado, alternativaA, alternativaB, alternativaC, alter
  'É um sino de ferro, geralmente duplo, percutido com baqueta para conduzir o baque.',
  'É um chocalho de cestaria trançada preenchido com sementes.',
  'C', 'maracatu');
+
+
+-- SELECTS
+ SELECT * FROM usuario;
+
+ SELECT * FROM pergunta;
+
+ SELECT * FROM tentativas_quiz;
+
+ SELECT * FROM resposta_quiz;
+
+ -- SELECTS COM JOIN
+ SELECT u.idUsuario, u.nome, u.email, tq.idTentativa, tq.acertos, tq.erros, tq.dtTentativa
+FROM usuario u
+INNER JOIN tentativas_quiz tq
+    ON u.idUsuario = tq.fkUsuario;
+
+SELECT u.nome, tq.idTentativa, p.enunciado, rq.alternativaEscolhida, rq.correta
+FROM usuario u
+INNER JOIN tentativas_quiz tq
+    ON u.idUsuario = tq.fkUsuario
+INNER JOIN resposta_quiz rq
+    ON tq.idTentativa = rq.fkTentativa
+INNER JOIN pergunta p
+    ON rq.fkPergunta = p.idPergunta;
+
+SELECT u.nome,
+    COUNT(tq.idTentativa) AS totalTentativas
+FROM usuario u
+LEFT JOIN tentativas_quiz tq
+    ON u.idUsuario = tq.fkUsuario
+GROUP BY u.idUsuario, u.nome;
