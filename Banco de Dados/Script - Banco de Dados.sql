@@ -40,3 +40,54 @@ CREATE TABLE resposta_quiz(
     CONSTRAINT fk_resposta_pergunta FOREIGN KEY (fkPergunta) REFERENCES pergunta(idPergunta),
     CONSTRAINT uq_tentativa_pergunta UNIQUE (fkTentativa, fkPergunta)
 );
+
+INSERT INTO pergunta (enunciado, alternativaA, alternativaB, alternativaC, alternativaD, respostaCorreta, tema) VALUES
+('Qual instrumento de cordas percutidas é considerado o coração e o comandante da roda de capoeira?',
+ 'Atabaque', 'Berimbau', 'Cavaquinho', 'Alfaia', 'B', 'capoeira'),
+ 
+('O Maracatu Nação (ou de Baque Virado) é uma manifestação cultural tradicionalmente associada a qual estado brasileiro?',
+ 'Bahia', 'Rio de Janeiro', 'Pernambuco', 'Maranhão', 'C', 'maracatu'),
+ 
+('No acervo, alguns instrumentos não são classificados estritamente como percussão, mas são fundamentais para as manifestações. Qual das alternativas abaixo apresenta um instrumento catalogado como "Não é percussão"?',
+ 'Cavaquinho', 'Surdo', 'Agogô', 'Pandeiro', 'A', 'samba'),
+ 
+('Qual é a principal função da cuíca nas baterias de samba?',
+ 'Marcar o som grave principal do surdo na linha de frente.',
+ 'Produzir um som de fricção característico que lembra um "gemido" ou uma voz.',
+ 'Conduzir o cortejo real através de batidas secas com esteira.',
+ 'Executar toques agudos com auxílio de uma vareta de metal nas campânulas.',
+ 'B', 'samba'),
+ 
+('Sobre a Capoeira Angola, sistematizada e preservada por Mestre Pastinha a partir da década de 1940, qual característica é correta?',
+ 'Possui postura totalmente ereta com saltos e acrobacias velozes.',
+ 'Utiliza uma bateria muito enxuta composta apenas por um berimbau e dois pandeiros.',
+ 'É um estilo contemporâneo que mistura o caratê com o maracatu.',
+ 'O jogo acontece mais próximo ao chão, com foco na estratégia, malícia (mandinga) e teatralidade.',
+ 'D', 'capoeira'),
+ 
+('Qual é o tambor grave de corpo cilíndrico em madeira que se destaca como o instrumento mais marcante do Maracatu Nação?',
+ 'Atabaque', 'Tantã', 'Alfaia', 'Repique', 'C', 'maracatu'),
+ 
+('Como costuma se estruturar o conjunto de atabaques tradicionais de acordo com seus tamanhos e alturas de som?',
+ 'Rum (grave), rumpi (médio) e lê (agudo).',
+ 'Gunga (grave), médio e viola (agudo).',
+ 'Primeira, segunda e terceira.',
+ 'Grave, tenor e soprano.',
+ 'A', 'umbanda'),
+ 
+('No contexto do Samba de Roda do Recôncavo Baiano, qual instrumento improvisado e tradicional é formado por um objeto de louça/metal e uma faca?',
+ 'Reco-reco de bambu', 'Agogô duplo', 'Caxixi e dobrão', 'Prato e faca', 'D', 'samba'),
+ 
+('Sobre a Umbanda e sua relação com a música, qual afirmativa condiz com a proposta apresentada no acervo?',
+ 'Existe uma única configuração ritual rígida e padronizada igual em todos os terreiros do Brasil.',
+ 'Os fundamentos, a liturgia e os instrumentos utilizados podem variar entre terreiros e vertentes.',
+ 'A Umbanda não utiliza nenhum tipo de canto ou percussão em suas cerimônias.',
+ 'Os atabaques são proibidos por liturgia em todas as casas de Umbanda.',
+ 'B', 'umbanda'),
+ 
+('O que caracteriza o instrumento chamado "Gonguê" utilizado no Maracatu?',
+ 'É um tambor cilíndrico friccionado por uma vareta interna.',
+ 'Trata-se de um arco musical de origem africana com cabaça.',
+ 'É um sino de ferro, geralmente duplo, percutido com baqueta para conduzir o baque.',
+ 'É um chocalho de cestaria trançada preenchido com sementes.',
+ 'C', 'maracatu');
