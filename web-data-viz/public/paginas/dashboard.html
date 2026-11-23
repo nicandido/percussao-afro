@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Percussão Afro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <!-- Só quem fez login pode ver a dashboard: sem login, vai para a tela de login -->
+  <script src="../js/sessao.js"></script>
+  <script>exigirLogin();</script>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="../index.html" class="logo"><span class="logo__icon">◉</span><span class="logo__text">Percussão<em>Afro</em></span></a>
+    <nav aria-label="Navegação da página">
+      <ul class="nav__list">
+        <li><a href="../index.html">Início</a></li>
+        <li><a href="sobre-mim.html">Sobre Mim</a></li>
+        <li><a href="acervo.html">Acervo</a></li>
+        <li><a href="dashboard.html" style="color: var(--cor-dourado);">Dashboard</a></li>
+        <li><a href="#" onclick="limparSessao(); return false;">Sair</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="content-page">
+  <div class="container dashboard-container">
+    <header class="content-page__intro">
+      <span class="content-page__eyebrow">Meu desempenho</span>
+      <h1 class="content-page__title">Olá, <span id="nomeUsuario"></span>!</h1>
+      <p class="content-page__lead" id="subtitulo">Carregando o resultado do seu último quiz...</p>
+    </header>
+
+    <!-- Sem nenhuma tentativa ainda -->
+    <section id="estadoVazio" class="dashboard-aviso" hidden>
+      <h2>Você ainda não fez o quiz</h2>
+      <p>Responda às 10 perguntas do quiz cultural e volte aqui para ver quantas você acertou e em qual tema você foi melhor.</p>
+      <a href="quiz.html" class="btn btn--primary">Fazer o quiz</a>
+    </section>
+
+    <!-- Erro ao buscar os dados -->
+    <section id="estadoErro" class="dashboard-aviso" hidden>
+      <h2>Não foi possível carregar seus dados</h2>
+      <p>Houve um problema ao buscar o seu resultado. Tente novamente em instantes.</p>
+      <button type="button" class="btn btn--dark" onclick="carregarDashboard()">Tentar novamente</button>
+    </section>
+
+    <!-- KPIs -->
+    <section id="kpis" class="kpi-grid" hidden>
+      <article class="kpi-card">
+        <h2 class="kpi-card__label">Perguntas acertadas</h2>
+        <p class="kpi-card__value"><span id="kpiAcertos">0</span><small id="kpiTotal">/ 10</small></p>
+        <p class="kpi-card__note">no seu último quiz</p>
+      </article>
+
+      <article class="kpi-card">
+        <h2 class="kpi-card__label">Tema com mais acertos</h2>
+        <p class="kpi-card__value" id="kpiTema">—</p>
+        <p class="kpi-card__note" id="kpiTemaNota"></p>
+      </article>
+
+      <article class="kpi-card">
+        <h2 class="kpi-card__label">Aproveitamento nesse tema</h2>
+        <p class="kpi-card__value"><span id="kpiPercentual">0</span><small>%</small></p>
+        <p class="kpi-card__note" id="kpiPercentualNota"></p>
+        <div class="kpi-bar" aria-hidden="true"><span id="kpiBarra"></span></div>
+      </article>
+    </section>
+
+    <div class="dashboard-actions" id="acoes" hidden>
+      <a href="quiz.html" class="btn btn--primary">Refazer o quiz</a>
+      <a href="../index.html" class="btn btn--dark">Voltar ao início</a>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand"><span class="logo__icon">◉</span><span class="logo__text">Percussão<em>Afro</em></span>
+        <p class="footer__tagline">Projeto Individual · SPTECH · 2026</p></div>
+    <div class="footer__links"><h4>Navegação</h4><a href="../index.html">Início</a><a href="sobre-mim.html">Sobre Mim</a>
+        <a href="acervo.html">Consultar acervo</a><a href="dashboard.html">Dashboard</a><a href="quiz.html">Quiz</a></div>
+    <div class="footer__credit"><p>Desenvolvido por <b>Nicollas Martins Candido</b><br><em>Ogã e umbandista: a percussão como
+        vivência.</em></p></div>
+  </div>
+  <div class="footer__bottom"><p>© 2026 Percussão Afro. Todos os direitos reservados.</p></div>
+</footer>
+
+<script>
+  const NOMES_TEMAS = { samba: 'Samba', capoeira: 'Capoeira', maracatu: 'Maracatu', umbanda: 'Umbanda' };
+
+  function nomeDoTema(tema) {
+    return NOMES_TEMAS[tema] || (tema.charAt(0).toUpperCase() + tema.slice(1));
+  }
+
+  function mostrarSomente(...ids) {
+    ['estadoVazio', 'estadoErro', 'kpis', 'acoes'].forEach(id => {
+      document.getElementById(id).hidden = !ids.includes(id);
+    });
+  }
+
+  function carregarDashboard() {
+    const subtitulo = document.getElementById('subtitulo');
+    subtitulo.textContent = 'Carregando o resultado do seu último quiz...';
+    mostrarSomente(); // esconde tudo enquanto carrega
+
+    apiAutenticada('/quiz/resumo', { cache: 'no-store' })
+      .then(resposta => {
+        if (!resposta.ok) throw new Error('Erro ' + resposta.status);
+        return resposta.json();
+      })
+      .then(resumo => {
+        if (!resumo.temTentativa) {
+          subtitulo.textContent = 'Seu desempenho aparecerá aqui depois do primeiro quiz.';
+          mostrarSomente('estadoVazio');
+          return;
+        }
+
+        // KPI 1: quantas perguntas acertou
+        document.getElementById('kpiAcertos').textContent = resumo.acertos;
+        document.getElementById('kpiTotal').textContent = '/ ' + resumo.total;
+
+        // KPIs 2 e 3: tema com mais acertos e o aproveitamento nele
+        const destaque = resumo.temaDestaque;
+        if (destaque) {
+          const nome = nomeDoTema(destaque.tema);
+          document.getElementById('kpiTema').textContent = nome;
+          document.getElementById('kpiTemaNota').textContent = 'o tema em que você teve melhor desempenho';
+          document.getElementById('kpiPercentual').textContent = destaque.percentual;
+          document.getElementById('kpiPercentualNota').textContent =
+            destaque.acertos + ' de ' + destaque.total + ' perguntas de ' + nome + ' corretas';
+          requestAnimationFrame(() => {
+            document.getElementById('kpiBarra').style.width = destaque.percentual + '%';
+          });
+        } else {
+          document.getElementById('kpiTema').textContent = '—';
+          document.getElementById('kpiTemaNota').textContent = 'você não acertou nenhuma pergunta desta vez';
+          document.getElementById('kpiPercentual').textContent = '0';
+          document.getElementById('kpiPercentualNota').textContent = 'tente novamente para descobrir seu tema forte';
+          document.getElementById('kpiBarra').style.width = '0';
+        }
+
+        const data = new Date(resumo.data);
+        subtitulo.textContent = 'Resultado do seu último quiz, realizado em ' +
+          data.toLocaleDateString('pt-BR') + ' às ' +
+          data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + '.';
+
+        mostrarSomente('kpis', 'acoes');
+      })
+      .catch(erro => {
+        if (!estaLogado()) return; // sessão expirada: já está indo para o login
+        console.log(erro);
+        subtitulo.textContent = '';
+        mostrarSomente('estadoErro');
+      });
+  }
+
+  if (estaLogado()) {
+    document.getElementById('nomeUsuario').textContent = sessionStorage.NOME_USUARIO;
+    carregarDashboard();
+  }
+</script>
+</body>
+</html>

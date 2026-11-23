@@ -9,6 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/quiz.css">
+  <!-- Só quem fez login pode ver o quiz: sem login, vai para a tela de login -->
+  <script src="../js/sessao.js"></script>
+  <script>exigirLogin();</script>
 </head>
 <body>
 
@@ -18,9 +21,11 @@
     <nav aria-label="Navegação da página">
       <ul class="nav__list">
         <li><a href="../index.html">Início</a></li>
-        <li><a href="paginas/sobre-mim.html">Sobre Mim</a></li>
-        <li><a href="paginas/acervo.html">Acervo</a></li>
-        <li><a href="paginas/quiz.html" style="color: var(--cor-dourado);">Quiz</a></li>
+        <li><a href="sobre-mim.html">Sobre Mim</a></li>
+        <li><a href="acervo.html">Acervo</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="#" onclick="limparSessao(); return false;">Sair</a></li>
+        <li><a href="quiz.html" style="color: var(--cor-dourado);">Quiz</a></li>
       </ul>
     </nav>
   </div>
@@ -174,7 +179,11 @@
     <div id="resultadoQuiz" class="quiz-result">
       <h2>Resultado do Quiz</h2>
       <p id="textoPontuacao"></p>
-      <button type="button" class="btn btn--dark" onclick="reiniciarQuiz()">Tentar Novamente</button>
+      <p id="statusSalvamento" class="quiz-save-status" role="status"></p>
+      <div class="quiz-result__acoes">
+        <a href="dashboard.html" class="btn btn--primary">Ver minha dashboard</a>
+        <button type="button" class="btn btn--dark" onclick="reiniciarQuiz()">Tentar Novamente</button>
+      </div>
     </div>
 
   </div>
@@ -184,8 +193,8 @@
   <div class="container footer__inner">
     <div class="footer__brand"><span class="logo__icon">◉</span><span class="logo__text">Percussão<em>Afro</em></span>
         <p class="footer__tagline">Projeto Individual · SPTECH · 2026</p></div>
-    <div class="footer__links"><h4>Navegação</h4><a href="index.html">Início</a><a href="paginas/sobre-mim.html">Sobre Mim</a>
-        <a href="paginas/acervo.html">Consultar acervo</a><a href="quiz.html">Quiz</a></div>
+    <div class="footer__links"><h4>Navegação</h4><a href="../index.html">Início</a><a href="sobre-mim.html">Sobre Mim</a>
+        <a href="acervo.html">Consultar acervo</a><a href="dashboard.html">Dashboard</a><a href="quiz.html">Quiz</a></div>
     <div class="footer__credit"><p>Desenvolvido por <b>Nicollas Martins Candido</b><br><em>Ogã e umbandista: a percussão como 
         vivência.</em></p></div>
   </div>
@@ -197,6 +206,7 @@
     const cards = document.querySelectorAll('.quiz-card');
     let acertos = 0;
     let respondidas = 0;
+    const respostas = []; // o que será enviado ao servidor
 
     cards.forEach((card, index) => {
       const qNum = index + 1;
@@ -206,6 +216,8 @@
 
       if (selecionada) {
         respondidas++;
+        // idPergunta = número da questão (1 a 10), igual ao idPergunta da tabela "pergunta" no banco
+        respostas.push({ idPergunta: qNum, alternativa: selecionada.value });
         if (selecionada.value === gabarito) {
           acertos++;
           feedback.textContent = "✔ Resposta correta!";
@@ -229,10 +241,43 @@
       blocoResultado.style.display = 'block';
       textoPontuacao.innerHTML = `Você acertou <b>${acertos}</b> de <b>${cards.length}</b> perguntas!`;
       window.scrollTo({ top: 300, behavior: 'smooth' });
+
+      salvarResultado(respostas);
     }
   }
 
+  // Envia as respostas para a API, que corrige com o gabarito do banco e guarda a tentativa.
+  function salvarResultado(respostas) {
+    const status = document.getElementById('statusSalvamento');
+    status.className = 'quiz-save-status';
+    status.textContent = 'Salvando seu resultado...';
+
+    apiAutenticada('/quiz/responder', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ respostas: respostas })
+    }).then(resposta => {
+      if (resposta.ok) {
+        status.className = 'quiz-save-status salvo';
+        status.textContent = '✔ Resultado salvo na sua dashboard.';
+        return;
+      }
+      throw new Error('Falha ao salvar (' + resposta.status + ')');
+    }).catch(erro => {
+      if (!estaLogado()) return; // sessão expirada: já está indo para o login
+      console.log(erro);
+      status.className = 'quiz-save-status erro';
+      status.innerHTML = '✖ Não foi possível salvar o resultado. ' +
+        '<a href="#" onclick="salvarResultado(ultimasRespostas); return false;" style="text-decoration: underline;">Tentar salvar novamente</a>';
+    });
+
+    ultimasRespostas = respostas;
+  }
+
+  let ultimasRespostas = [];
+
   function reiniciarQuiz() {
+    document.getElementById('statusSalvamento').textContent = '';
     document.getElementById('quizForm').reset();
     document.getElementById('quizForm').style.display = 'block';
     document.getElementById('resultadoQuiz').style.display = 'none';
