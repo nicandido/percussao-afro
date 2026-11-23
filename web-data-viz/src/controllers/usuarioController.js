@@ -1,5 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
-var { gerarToken } = require("../utils/token");
+var { gerarToken } = require("../seguranca/token");
 
 function autenticar(req, res) {
     var email = req.body.emailServer;

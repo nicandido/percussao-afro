@@ -42,7 +42,8 @@
         <h2 class="auth__title">Crie sua conta</h2>
         <p class="auth__description">Preencha seus dados para fazer parte da plataforma.</p>
 
-        <form class="auth-form" action="#" method="post">
+        <form class="auth-form" id="formCadastro" action="#" method="post">
+          <div id="mensagem" class="auth__mensagem" role="alert"></div>
           <div class="form__group">
             <label for="nome">Nome completo</label>
             <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" autocomplete="name" required />
@@ -65,7 +66,7 @@
             <input type="checkbox" name="termos" required />
             <span>Li e concordo com os <a href="#">termos de uso</a> e a <a href="#">política de privacidade</a>.</span>
           </label>
-          <button type="submit" class="auth__submit">Criar minha conta <span>→</span></button>
+          <button type="submit" class="auth__submit" id="botaoCadastrar">Criar minha conta <span>→</span></button>
         </form>
 
         <p class="auth__switch">Já possui uma conta? <a href="login.html">Faça login</a></p>
@@ -77,5 +78,62 @@
   <footer class="auth__footer">
     <p>© 2026 Percussão Afro. Todos os direitos reservados.</p>
   </footer>
+
+  <script>
+    var formCadastro = document.getElementById("formCadastro");
+    var caixaMensagem = document.getElementById("mensagem");
+    var botaoCadastrar = document.getElementById("botaoCadastrar");
+
+    function mostrarMensagem(texto, tipo) {
+      caixaMensagem.textContent = texto;
+      caixaMensagem.className = "auth__mensagem " + tipo;
+    }
+
+    formCadastro.addEventListener("submit", function (evento) {
+      evento.preventDefault(); // o navegador já validou os campos obrigatórios
+      caixaMensagem.className = "auth__mensagem";
+
+      var senha = document.getElementById("senha").value;
+      var confirmacao = document.getElementById("confirmar-senha").value;
+
+      if (senha !== confirmacao) {
+        mostrarMensagem("As senhas não coincidem. Digite a mesma senha nos dois campos.", "erro");
+        return;
+      }
+
+      botaoCadastrar.disabled = true;
+
+      fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nomeServer: document.getElementById("nome").value.trim(),
+          emailServer: document.getElementById("email").value.trim(),
+          senhaServer: senha
+        })
+      }).then(function (resposta) {
+        if (resposta.ok) {
+          mostrarMensagem("Cadastro realizado com sucesso! Redirecionando para o login...", "sucesso");
+          setTimeout(function () {
+            window.location.href = "login.html";
+          }, 1800);
+          return;
+        }
+
+        botaoCadastrar.disabled = false;
+        if (resposta.status >= 500) {
+          mostrarMensagem("Não foi possível concluir o cadastro agora. Tente novamente em instantes.", "erro");
+          return;
+        }
+        return resposta.text().then(function (texto) {
+          mostrarMensagem(texto, "erro"); // ex.: "Este e-mail já está cadastrado!"
+        });
+      }).catch(function (erro) {
+        console.log(erro);
+        botaoCadastrar.disabled = false;
+        mostrarMensagem("Não foi possível conectar ao servidor. Tente novamente.", "erro");
+      });
+    });
+  </script>
 </body>
 </html>

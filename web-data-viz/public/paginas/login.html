@@ -42,7 +42,8 @@
         <h2 class="auth__title">Acesse sua conta</h2>
         <p class="auth__description">Entre para continuar explorando o nosso acervo.</p>
 
-        <form class="auth-form" action="#" method="post">
+        <form class="auth-form" id="formLogin" action="#" method="post">
+          <div id="mensagem" class="auth__mensagem" role="alert"></div>
           <div class="form__group">
             <label for="email">E-mail</label>
             <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" autocomplete="email" required />
@@ -55,7 +56,7 @@
             <label class="form__remember"><input type="checkbox" name="lembrar" /> <span>Manter conectado</span></label>
             <a href="#" class="form__link">Esqueceu a senha?</a>
           </div>
-          <button type="submit" class="auth__submit">Realizar Login<span>→</span></button>
+          <button type="submit" class="auth__submit" id="botaoEntrar">Realizar Login<span>→</span></button>
         </form>
 
         <p class="auth__switch">Ainda não possui uma conta? <a href="cadastro.html">Cadastre-se</a></p>
@@ -67,5 +68,63 @@
   <footer class="auth__footer">
     <p>© 2026 Percussão Afro. Todos os direitos reservados.</p>
   </footer>
+
+  <script>
+    var formLogin = document.getElementById("formLogin");
+    var caixaMensagem = document.getElementById("mensagem");
+    var botaoEntrar = document.getElementById("botaoEntrar");
+
+    function mostrarMensagem(texto, tipo) {
+      caixaMensagem.textContent = texto;
+      caixaMensagem.className = "auth__mensagem " + tipo;
+    }
+
+    // Se o usuário veio do quiz/dashboard, volta para lá. Só aceita páginas internas de /paginas/.
+    function destinoAposLogin() {
+      var destino = new URLSearchParams(window.location.search).get("destino");
+      if (destino && /^\/paginas\/[a-z0-9-]+\.html$/i.test(destino)) {
+        return destino;
+      }
+      return "/index.html";
+    }
+
+    formLogin.addEventListener("submit", function (evento) {
+      evento.preventDefault(); // o navegador já validou os campos obrigatórios
+      caixaMensagem.className = "auth__mensagem";
+      botaoEntrar.disabled = true;
+
+      fetch("/usuarios/autenticar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          emailServer: document.getElementById("email").value.trim(),
+          senhaServer: document.getElementById("senha").value
+        })
+      }).then(function (resposta) {
+        if (resposta.ok) {
+          return resposta.json().then(function (json) {
+            sessionStorage.ID_USUARIO = json.id;
+            sessionStorage.NOME_USUARIO = json.nome;
+            sessionStorage.EMAIL_USUARIO = json.email;
+            sessionStorage.TOKEN_USUARIO = json.token;
+            window.location.href = destinoAposLogin();
+          });
+        }
+
+        botaoEntrar.disabled = false;
+        if (resposta.status >= 500) {
+          mostrarMensagem("Não foi possível entrar agora. Tente novamente em instantes.", "erro");
+          return;
+        }
+        return resposta.text().then(function (texto) {
+          mostrarMensagem(texto, "erro");
+        });
+      }).catch(function (erro) {
+        console.log(erro);
+        botaoEntrar.disabled = false;
+        mostrarMensagem("Não foi possível conectar ao servidor. Tente novamente.", "erro");
+      });
+    });
+  </script>
 </body>
 </html>

@@ -42,7 +42,7 @@ function apiAutenticada(url, opcoes) {
 // Funciona nos <li> que tiverem estes ids (se a página não tiver, nada acontece).
 function atualizarMenu() {
     var logado = estaLogado();
-    var mostrar = { "nav-dashboard": logado, "nav-sair": logado, "nav-login": !logado, "nav-cadastro": !logado };
+    var mostrar = { "nav-dashboard": logado, "nav-sair": logado, "nav-quiz": logado, "nav-login": !logado, "nav-cadastro": !logado };
 
     Object.keys(mostrar).forEach(function (id) {
         var item = document.getElementById(id);
