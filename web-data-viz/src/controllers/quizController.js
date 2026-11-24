@@ -1,8 +1,5 @@
 var quizModel = require("../models/quizModel");
 
-// Recebe: { respostas: [ { idPergunta: 1, alternativa: "B" }, ... ] }
-// O id do usuário vem do token (req.idUsuario), nunca do corpo da requisição.
-// Quem corrige é o servidor, comparando com o gabarito do banco.
 async function responder(req, res) {
     var respostas = req.body.respostas;
 
