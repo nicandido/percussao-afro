@@ -118,6 +118,17 @@ async function resumo(req, res) {
         // quem não acertou nada não tem "tema destaque"
         var temaDestaque = temas.length > 0 && temas[0].acertos > 0 ? temas[0] : null;
 
+        // aproveitamento geral: acertos ÷ perguntas respondidas, somando todas as tentativas
+        var linhaGeral = (await quizModel.buscarDesempenhoGeral(req.idUsuario))[0];
+        var acertosGeral = Number(linhaGeral.acertos);
+        var totalGeral = Number(linhaGeral.total);
+        var geral = {
+            tentativas: Number(linhaGeral.tentativas),
+            acertos: acertosGeral,
+            total: totalGeral,
+            percentual: totalGeral > 0 ? Math.round((acertosGeral / totalGeral) * 100) : 0
+        };
+
         res.status(200).json({
             temTentativa: true,
             idTentativa: tentativa.idTentativa,
@@ -126,7 +137,8 @@ async function resumo(req, res) {
             erros: tentativa.erros,
             total: tentativa.acertos + tentativa.erros,
             temaDestaque: temaDestaque,
-            temas: temas
+            temas: temas,
+            geral: geral
         });
     } catch (erro) {
         console.log(erro);

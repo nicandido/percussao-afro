@@ -9,6 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/dashboard.css">
+  <!-- Chart.js (biblioteca do gráfico) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
   <!-- Só quem fez login pode ver a dashboard: sem login, vai para a tela de login -->
   <script src="../js/sessao.js"></script>
   <script>exigirLogin();</script>
@@ -31,7 +33,7 @@
   </div>
 </header>
 
-<main class="content-page">
+<main class="content-page content-page--compacta">
   <div class="container dashboard-container">
     <header class="content-page__intro">
       <span class="content-page__eyebrow">Meu desempenho</span>
@@ -39,21 +41,18 @@
       <p class="content-page__lead" id="subtitulo">Carregando o resultado do seu último quiz...</p>
     </header>
 
-    <!-- Sem nenhuma tentativa ainda -->
     <section id="estadoVazio" class="dashboard-aviso" hidden>
       <h2>Você ainda não fez o quiz</h2>
       <p>Responda às 10 perguntas do quiz cultural e volte aqui para ver quantas você acertou e em qual tema você foi melhor.</p>
       <a href="quiz.html" class="btn btn--primary">Fazer o quiz</a>
     </section>
 
-    <!-- Erro ao buscar os dados -->
     <section id="estadoErro" class="dashboard-aviso" hidden>
       <h2>Não foi possível carregar seus dados</h2>
       <p>Houve um problema ao buscar o seu resultado. Tente novamente em instantes.</p>
       <button type="button" class="btn btn--dark" onclick="carregarDashboard()">Tentar novamente</button>
     </section>
 
-    <!-- KPIs -->
     <section id="kpis" class="kpi-grid" hidden>
       <article class="kpi-card">
         <h2 class="kpi-card__label">Perguntas acertadas</h2>
@@ -63,7 +62,7 @@
 
       <article class="kpi-card">
         <h2 class="kpi-card__label">Tema com mais acertos</h2>
-        <p class="kpi-card__value" id="kpiTema">—</p>
+        <p class="kpi-card__value kpi-card__value--texto" id="kpiTema">—</p>
         <p class="kpi-card__note" id="kpiTemaNota"></p>
       </article>
 
@@ -73,6 +72,36 @@
         <p class="kpi-card__note" id="kpiPercentualNota"></p>
         <div class="kpi-bar" aria-hidden="true"><span id="kpiBarra"></span></div>
       </article>
+
+      <article class="kpi-card">
+        <h2 class="kpi-card__label">Aproveitamento geral</h2>
+        <p class="kpi-card__value"><span id="kpiGeral">0</span><small>%</small></p>
+        <p class="kpi-card__note" id="kpiGeralNota"></p>
+        <div class="kpi-bar" aria-hidden="true"><span id="kpiGeralBarra"></span></div>
+      </article>
+    </section>
+
+    <section id="graficoCard" class="chart-card" hidden>
+      <header class="chart-card__cab">
+        <div>
+          <h2 class="chart-card__titulo">Aproveitamento por tema</h2>
+          <p class="chart-card__sub">Percentual de acertos de cada tema no seu último quiz.</p>
+        </div>
+        <button type="button" class="chart-card__alternar" id="botaoTabela" aria-expanded="false" aria-controls="graficoTabela" onclick="alternarTabela()">Ver em tabela</button>
+      </header>
+
+      <div class="chart-card__area" id="graficoArea">
+        <canvas id="graficoTemas" role="img" aria-label="Gráfico de barras com o percentual de acertos de cada tema no último quiz. Os mesmos números estão na tabela, no botão acima do gráfico."></canvas>
+      </div>
+
+      <div class="chart-card__tabela" id="graficoTabela" hidden>
+        <table>
+          <thead>
+            <tr><th scope="col">Tema</th><th scope="col">Acertos</th><th scope="col">Aproveitamento</th></tr>
+          </thead>
+          <tbody id="tabelaTemas"></tbody>
+        </table>
+      </div>
     </section>
 
     <div class="dashboard-actions" id="acoes" hidden>
@@ -97,20 +126,140 @@
 <script>
   const NOMES_TEMAS = { samba: 'Samba', capoeira: 'Capoeira', maracatu: 'Maracatu', umbanda: 'Umbanda' };
 
+  const COR_DESTAQUE = '#7a3e1d';
+  const COR_DEMAIS = '#9c8f7a';
+  const COR_TEXTO = '#2b1d12';
+  const COR_TEXTO_SUAVE = '#6b5a4a';
+
+  let graficoTemas = null;
+
   function nomeDoTema(tema) {
     return NOMES_TEMAS[tema] || (tema.charAt(0).toUpperCase() + tema.slice(1));
   }
 
   function mostrarSomente(...ids) {
-    ['estadoVazio', 'estadoErro', 'kpis', 'acoes'].forEach(id => {
+    ['estadoVazio', 'estadoErro', 'kpis', 'graficoCard', 'acoes'].forEach(id => {
       document.getElementById(id).hidden = !ids.includes(id);
+    });
+  }
+
+  function mostrarTabela(visivel) {
+    document.getElementById('graficoTabela').hidden = !visivel;
+    const botao = document.getElementById('botaoTabela');
+    botao.setAttribute('aria-expanded', String(visivel));
+    botao.textContent = visivel ? 'Ocultar tabela' : 'Ver em tabela';
+  }
+
+  function alternarTabela() {
+    mostrarTabela(document.getElementById('graficoTabela').hidden);
+  }
+
+  function preencherTabela(temas) {
+    const corpo = document.getElementById('tabelaTemas');
+    corpo.replaceChildren();
+    temas.forEach(t => {
+      const linha = document.createElement('tr');
+      [nomeDoTema(t.tema), t.acertos + ' de ' + t.total, t.percentual + '%'].forEach(texto => {
+        const celula = document.createElement('td');
+        celula.textContent = texto;
+        linha.appendChild(celula);
+      });
+      corpo.appendChild(linha);
+    });
+  }
+
+  const rotulosNaPonta = {
+    id: 'rotulosNaPonta',
+    afterDatasetsDraw(chart, args, opcoes) {
+      const ctx = chart.ctx;
+      ctx.save();
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      chart.getDatasetMeta(0).data.forEach((barra, i) => {
+        const destaque = i === opcoes.indiceDestaque;
+        ctx.font = (destaque ? '700 ' : '500 ') + '13px Inter, sans-serif';
+        ctx.fillStyle = destaque ? COR_TEXTO : COR_TEXTO_SUAVE;
+        ctx.fillText(opcoes.valores[i] + '%', barra.x + 8, barra.y);
+      });
+      ctx.restore();
+    }
+  };
+
+  function desenharGrafico(temas, destaque) {
+    preencherTabela(temas);
+
+    if (typeof Chart === 'undefined') {
+      document.getElementById('graficoArea').hidden = true;
+      mostrarTabela(true);
+      return;
+    }
+    document.getElementById('graficoArea').hidden = false;
+
+    if (graficoTemas) graficoTemas.destroy();
+
+    const indiceDestaque = destaque ? temas.findIndex(t => t.tema === destaque.tema) : -1;
+    const reduzirMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+
+    graficoTemas = new Chart(document.getElementById('graficoTemas'), {
+      type: 'bar',
+      data: {
+        labels: temas.map(t => nomeDoTema(t.tema)),
+        datasets: [{
+          data: temas.map(t => t.percentual),
+          backgroundColor: temas.map((t, i) => i === indiceDestaque ? COR_DESTAQUE : COR_DEMAIS),
+          borderRadius: { topRight: 4, bottomRight: 4 },
+          borderSkipped: false,
+          barThickness: 20
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: reduzirMovimento ? false : { duration: 700 },
+        layout: { padding: { right: 52 } },
+        interaction: { mode: 'nearest', axis: 'y', intersect: false },
+        scales: {
+          x: {
+            min: 0,
+            max: 100,
+            ticks: { stepSize: 25, color: COR_TEXTO_SUAVE, callback: v => v + '%' },
+            grid: { color: '#ece4d6', lineWidth: 1 },
+            border: { display: false }
+          },
+          y: {
+            ticks: { color: COR_TEXTO, font: { size: 13, weight: '600' } },
+            grid: { display: false },
+            border: { display: false }
+          }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            displayColors: false,
+            backgroundColor: COR_TEXTO,
+            padding: 10,
+            callbacks: {
+              title: itens => itens[0].label,
+              label: item => {
+                const t = temas[item.dataIndex];
+                return t.acertos + ' de ' + t.total + ' perguntas corretas (' + t.percentual + '%)';
+              }
+            }
+          },
+          rotulosNaPonta: { valores: temas.map(t => t.percentual), indiceDestaque: indiceDestaque }
+        }
+      },
+      plugins: [rotulosNaPonta]
     });
   }
 
   function carregarDashboard() {
     const subtitulo = document.getElementById('subtitulo');
     subtitulo.textContent = 'Carregando o resultado do seu último quiz...';
-    mostrarSomente(); // esconde tudo enquanto carrega
+    mostrarSomente(); 
 
     apiAutenticada('/quiz/resumo', { cache: 'no-store' })
       .then(resposta => {
@@ -124,11 +273,9 @@
           return;
         }
 
-        // KPI 1: quantas perguntas acertou
         document.getElementById('kpiAcertos').textContent = resumo.acertos;
         document.getElementById('kpiTotal').textContent = '/ ' + resumo.total;
 
-        // KPIs 2 e 3: tema com mais acertos e o aproveitamento nele
         const destaque = resumo.temaDestaque;
         if (destaque) {
           const nome = nomeDoTema(destaque.tema);
@@ -148,15 +295,25 @@
           document.getElementById('kpiBarra').style.width = '0';
         }
 
+        const geral = resumo.geral;
+        document.getElementById('kpiGeral').textContent = geral.percentual;
+        document.getElementById('kpiGeralNota').textContent =
+          geral.acertos + ' acertos em ' + geral.total + ' respostas (' +
+          geral.tentativas + (geral.tentativas === 1 ? ' tentativa' : ' tentativas') + ')';
+        requestAnimationFrame(() => {
+          document.getElementById('kpiGeralBarra').style.width = geral.percentual + '%';
+        });
+
         const data = new Date(resumo.data);
         subtitulo.textContent = 'Resultado do seu último quiz, realizado em ' +
           data.toLocaleDateString('pt-BR') + ' às ' +
           data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + '.';
 
-        mostrarSomente('kpis', 'acoes');
+        mostrarSomente('kpis', 'graficoCard', 'acoes');
+        desenharGrafico(resumo.temas, destaque); 
       })
       .catch(erro => {
-        if (!estaLogado()) return; // sessão expirada: já está indo para o login
+        if (!estaLogado()) return; 
         console.log(erro);
         subtitulo.textContent = '';
         mostrarSomente('estadoErro');

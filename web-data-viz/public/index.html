@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/index.css"/>
   <script src="js/sessao.js"></script>
 </head>
 <body>
@@ -20,15 +21,23 @@
         <span class="logo__text">Percussão<em>Afro</em></span>
       </a>
 
-      <nav class="nav" aria-label="Menu principal">
+      <!-- Links do site, centralizados no cabeçalho -->
+      <nav class="nav nav--centro" aria-label="Menu principal">
         <ul class="nav__list">
           <li><a href="#sobre">Sobre o projeto</a></li>
           <li><a href="paginas/sobre-mim.html">Sobre Mim</a></li>
+          <li><a href="paginas/acervo.html">Acervo</a></li>
+        </ul>
+      </nav>
+
+      <!-- Botões da conta (à direita): o sessao.js mostra um grupo ou o outro conforme o login -->
+      <nav class="nav nav--acoes" aria-label="Conta">
+        <ul class="nav__list">
           <li id="nav-login"><a href="paginas/login.html" class="btn btn--ghost btn--sm">Login</a></li>
           <li id="nav-cadastro"><a href="paginas/cadastro.html" class="btn btn--primary btn--sm">Cadastrar</a></li>
-          <li id="nav-dashboard" hidden><a href="paginas/dashboard.html">Dashboard</a></li>
-          <li id="nav-sair" hidden><a href="#" class="btn btn--ghost btn--sm" onclick="limparSessao(); return false;">Sair</a></li>
           <li id="nav-quiz" hidden><a href="paginas/quiz.html">Quiz</a></li>
+          <li id="nav-dashboard" hidden><a href="paginas/dashboard.html" class="btn btn--primary btn--sm">Dashboard</a></li>
+          <li id="nav-sair" hidden><a href="#" class="btn btn--ghost btn--sm" onclick="limparSessao(); return false;">Sair</a></li>
         </ul>
       </nav>
     </div>

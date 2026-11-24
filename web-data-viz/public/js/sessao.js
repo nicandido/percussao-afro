@@ -1,3 +1,10 @@
+// Controle de sessão do site Percussão Afro.
+// Usado por: login, cadastro, quiz, dashboard e menu do index.
+//
+// Ao fazer login, o login.html guarda no sessionStorage:
+//   ID_USUARIO, NOME_USUARIO, EMAIL_USUARIO e TOKEN_USUARIO
+// O token é enviado à API em todas as rotas protegidas (/quiz/...).
+
 var PAGINA_LOGIN = "/paginas/login.html";
 
 function estaLogado() {
@@ -38,11 +45,17 @@ function apiAutenticada(url, opcoes) {
     });
 }
 
-// Ajusta o menu: logado mostra Dashboard e Sair; deslogado mostra Login e Cadastrar.
+// Ajusta o menu: logado mostra Quiz, Dashboard e Sair; deslogado mostra Login e Cadastrar.
 // Funciona nos <li> que tiverem estes ids (se a página não tiver, nada acontece).
 function atualizarMenu() {
     var logado = estaLogado();
-    var mostrar = { "nav-dashboard": logado, "nav-sair": logado, "nav-quiz": logado, "nav-login": !logado, "nav-cadastro": !logado };
+    var mostrar = {
+        "nav-quiz": logado,
+        "nav-dashboard": logado,
+        "nav-sair": logado,
+        "nav-login": !logado,
+        "nav-cadastro": !logado
+    };
 
     Object.keys(mostrar).forEach(function (id) {
         var item = document.getElementById(id);

@@ -1,0 +1,58 @@
+/* Cabeçalho da página inicial: logo | links centralizados | botões da conta.
+   Carregado depois do style.css, só no index.html. */
+
+.header__inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+}
+
+.header__inner .logo { justify-self: start; }
+.nav--centro { justify-self: center; }
+.nav--acoes { justify-self: end; }
+.nav--acoes .nav__list { gap: 12px; }
+
+/* Telas médias e pequenas: logo e conta em cima, links centralizados embaixo */
+@media (max-width: 1000px) {
+  .header__inner {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "logo acoes"
+      "centro centro";
+    height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    row-gap: 10px;
+  }
+
+  .header__inner .logo { grid-area: logo; }
+  .nav--acoes { grid-area: acoes; }
+  .nav--centro { grid-area: centro; justify-self: center; }
+}
+
+@media (max-width: 640px) {
+  /* o style.css esconde todos os itens do menu menos o último;
+     aqui voltam a aparecer todos, exceto os que estão com o atributo "hidden" */
+  .header .nav__list li:not([hidden]) { display: list-item; }
+
+  /* celular: três linhas centralizadas (logo, botões da conta, links).
+     Como o cabeçalho fica alto, ele deixa de ficar fixo no topo ao rolar. */
+  .header { position: relative; }
+
+  .header__inner {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "logo"
+      "acoes"
+      "centro";
+    justify-items: center;
+  }
+
+  .header__inner .logo,
+  .nav--acoes,
+  .nav--centro { justify-self: center; }
+
+  .nav--acoes .nav__list { gap: 10px; }
+  .nav--centro .nav__list { gap: 18px; }
+}

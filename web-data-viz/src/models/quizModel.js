@@ -50,11 +50,24 @@ function buscarDesempenhoPorTema(idTentativa) {
     return database.executar(instrucaoSql, [idTentativa]);
 }
 
+// Soma de TODAS as tentativas do usuário: quantas tentativas, acertos e perguntas respondidas
+function buscarDesempenhoGeral(idUsuario) {
+    var instrucaoSql = `
+        SELECT COUNT(*) AS tentativas,
+               COALESCE(SUM(acertos), 0) AS acertos,
+               COALESCE(SUM(acertos + erros), 0) AS total
+        FROM tentativas_quiz
+        WHERE fkUsuario = ?;
+    `;
+    return database.executar(instrucaoSql, [idUsuario]);
+}
+
 module.exports = {
     buscarGabarito,
     registrarTentativa,
     registrarRespostas,
     removerTentativa,
     buscarUltimaTentativa,
-    buscarDesempenhoPorTema
+    buscarDesempenhoPorTema,
+    buscarDesempenhoGeral
 };
