@@ -98,24 +98,24 @@ rota  →  controller  →  model  →  banco de dados
 
 ## Modelagem do banco de dados
 
-Banco: `percussao\\\_afro`, com 4 tabelas.
+Banco: `percussao\\\\\\\_afro`, com 4 tabelas.
 
 ```
-usuario ──1:N──▶ tentativas\\\_quiz ──1:N──▶ resposta\\\_quiz ◀──N:1── pergunta
+usuario ──1:N──▶ tentativas\\\\\\\_quiz ──1:N──▶ resposta\\\\\\\_quiz ◀──N:1── pergunta
 ```
 
 |Tabela|Descrição|Chaves|
 |-|-|-|
 |`usuario`|Contas cadastradas (nome, e-mail, senha, data de cadastro)|PK `idUsuario`|
 |`pergunta`|Perguntas do quiz, alternativas A–D, resposta correta e tema|PK `idPergunta`|
-|`tentativas\\\_quiz`|Cada vez que o usuário envia o quiz (acertos, erros, data/hora)|PK `idTentativa`, FK `fkUsuario`|
-|`resposta\\\_quiz`|Cada resposta dada em uma tentativa|PK composta `(idResposta, fkTentativa)`, FK `fkPergunta`|
+|`tentativas\\\\\\\_quiz`|Cada vez que o usuário envia o quiz (acertos, erros, data/hora)|PK `idTentativa`, FK `fkUsuario`|
+|`resposta\\\\\\\_quiz`|Cada resposta dada em uma tentativa|PK composta `(idResposta, fkTentativa)`, FK `fkPergunta`|
 
 **Relacionamentos**
 
-* `usuario → tentativas\\\_quiz`: 1:N
-* `tentativas\\\_quiz → resposta\\\_quiz`: 1:N
-* `pergunta → resposta\\\_quiz`: 1:N
+* `usuario → tentativas\\\\\\\_quiz`: 1:N
+* `tentativas\\\\\\\_quiz → resposta\\\\\\\_quiz`: 1:N
+* `pergunta → resposta\\\\\\\_quiz`: 1:N
 
 
 
@@ -131,23 +131,23 @@ usuario ──1:N──▶ tentativas\\\_quiz ──1:N──▶ resposta\\\_qui
    ```
 
 2. **Crie o banco de dados**
-Execute no MySQL, nesta ordem: o script de criação do banco (`percussao\\\_afro`) e o das perguntas do quiz (`sql/02\\\_seed\\\_perguntas.sql`). Rode o script das perguntas apenas se a tabela `pergunta` estiver vazia.
+Execute no MySQL, nesta ordem: o script de criação do banco (`percussao\\\\\\\_afro`) e o das perguntas do quiz (`sql/02\\\\\\\_seed\\\\\\\_perguntas.sql`). Rode o script das perguntas apenas se a tabela `pergunta` estiver vazia.
 3. **Configure as variáveis de ambiente**
 Crie um arquivo `.env` na raiz:
 
 ```env
-   AMBIENTE\\\_PROCESSO=producao
-   APP\\\_HOST=localhost
-   APP\\\_PORT=3333
-   DB\\\_HOST=localhost
-   DB\\\_DATABASE=percussao\\\_afro
-   DB\\\_USER=seu\\\_usuario
-   DB\\\_PASSWORD=sua\\\_senha
-   DB\\\_PORT=3306
-   TOKEN\\\_SECRET=uma\\\_frase\\\_longa\\\_e\\\_aleatoria
+   AMBIENTE\\\\\\\_PROCESSO=producao
+   APP\\\\\\\_HOST=localhost
+   APP\\\\\\\_PORT=3333
+   DB\\\\\\\_HOST=localhost
+   DB\\\\\\\_DATABASE=percussao\\\\\\\_afro
+   DB\\\\\\\_USER=seu\\\\\\\_usuario
+   DB\\\\\\\_PASSWORD=sua\\\\\\\_senha
+   DB\\\\\\\_PORT=3306
+   TOKEN\\\\\\\_SECRET=uma\\\\\\\_frase\\\\\\\_longa\\\\\\\_e\\\\\\\_aleatoria
    ```
 
-> Com `AMBIENTE\\\_PROCESSO=producao` a aplicação lê o `.env`; com `desenvolvimento`, lê o `.env.dev`.
+> Com `AMBIENTE\\\\\\\_PROCESSO=producao` a aplicação lê o `.env`; com `desenvolvimento`, lê o `.env.dev`.
 
 4. **Instale as dependências e inicie**
 
@@ -156,7 +156,7 @@ Crie um arquivo `.env` na raiz:
    npm start
    ```
 
-5. **Acesse** `http://localhost:3333` (ou a porta definida em `APP\\\_PORT`).
+5. **Acesse** `http://localhost:3333` (ou a porta definida em `APP\\\\\\\_PORT`).
 
 ## API
 
