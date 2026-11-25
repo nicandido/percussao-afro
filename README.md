@@ -46,7 +46,7 @@ O **Percussão Afro** nasceu para valorizar e divulgar a cultura de matriz afric
 |ODS|Meta|Como o projeto contribui|
 |-|-|-|
 |**4 – Educação de Qualidade**|4.7|Ensina sobre a diversidade cultural afro-brasileira e acompanha o aprendizado com quiz e dashboard|
-|**11 – Cidades e Comunidades Sustentáveis**|11.4|Divulga e registra o patrimônio cultural imaterial por meio do acervo|
+|**10 – Redução das Desigualdades**|10.2|Valoriza as tradições de matriz africana e combate o preconceito, promovendo a inclusão social e cultural|
 
 ## Tecnologias
 
@@ -54,7 +54,6 @@ O **Percussão Afro** nasceu para valorizar e divulgar a cultura de matriz afric
 
 * HTML5, CSS3 e JavaScript (sem frameworks)
 * [Chart.js](https://www.chartjs.org/) v4 para o gráfico da dashboard
-* `sessionStorage` para guardar a sessão no navegador
 
 **Back-end**
 
@@ -70,7 +69,7 @@ O **Percussão Afro** nasceu para valorizar e divulgar a cultura de matriz afric
 
 ## Arquitetura
 
-O servidor Express serve os arquivos estáticos da pasta `public/` e expõe a API em rotas separadas, seguindo a divisão em camadas do modelo da SPTech (`web-data-viz`):
+O servidor Express serve os arquivos estáticos da pasta `public/` e expõe a API em rotas separadas, seguindo a divisão em camadas do `web-data-viz`:
 
 ```
 rota  →  controller  →  model  →  banco de dados
@@ -99,56 +98,56 @@ rota  →  controller  →  model  →  banco de dados
 
 ## Modelagem do banco de dados
 
-Banco: `percussao\_afro`, com 4 tabelas.
+Banco: `percussao\\\_afro`, com 4 tabelas.
 
 ```
-usuario ──1:N──▶ tentativas\_quiz ──1:N──▶ resposta\_quiz ◀──N:1── pergunta
+usuario ──1:N──▶ tentativas\\\_quiz ──1:N──▶ resposta\\\_quiz ◀──N:1── pergunta
 ```
 
 |Tabela|Descrição|Chaves|
 |-|-|-|
 |`usuario`|Contas cadastradas (nome, e-mail, senha, data de cadastro)|PK `idUsuario`|
 |`pergunta`|Perguntas do quiz, alternativas A–D, resposta correta e tema|PK `idPergunta`|
-|`tentativas\_quiz`|Cada vez que o usuário envia o quiz (acertos, erros, data/hora)|PK `idTentativa`, FK `fkUsuario`|
-|`resposta\_quiz`|Cada resposta dada em uma tentativa|PK composta `(idResposta, fkTentativa)`, FK `fkPergunta`|
+|`tentativas\\\_quiz`|Cada vez que o usuário envia o quiz (acertos, erros, data/hora)|PK `idTentativa`, FK `fkUsuario`|
+|`resposta\\\_quiz`|Cada resposta dada em uma tentativa|PK composta `(idResposta, fkTentativa)`, FK `fkPergunta`|
 
 **Relacionamentos**
 
-* `usuario → tentativas\_quiz`: 1:N
-* `tentativas\_quiz → resposta\_quiz`: 1:N
-* `pergunta → resposta\_quiz`: 1:N
+* `usuario → tentativas\\\_quiz`: 1:N
+* `tentativas\\\_quiz → resposta\\\_quiz`: 1:N
+* `pergunta → resposta\\\_quiz`: 1:N
 
 
 
 ## Como executar
 
-**Pré-requisitos:** Node.js 18+ e MySQL 8.
+**Pré-requisitos:** Node.js e MySQL.
 
 1. **Clone o repositório**
 
 ```bash
-   git clone https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git
+   git clone https://github.com/nicandido/percussao-afro.git
    cd SEU-REPOSITORIO
    ```
 
 2. **Crie o banco de dados**
-Execute no MySQL, nesta ordem: o script de criação do banco (`percussao\_afro`) e o das perguntas do quiz (`sql/02\_seed\_perguntas.sql`). Rode o script das perguntas apenas se a tabela `pergunta` estiver vazia.
+Execute no MySQL, nesta ordem: o script de criação do banco (`percussao\\\_afro`) e o das perguntas do quiz (`sql/02\\\_seed\\\_perguntas.sql`). Rode o script das perguntas apenas se a tabela `pergunta` estiver vazia.
 3. **Configure as variáveis de ambiente**
 Crie um arquivo `.env` na raiz:
 
 ```env
-   AMBIENTE\_PROCESSO=producao
-   APP\_HOST=localhost
-   APP\_PORT=3333
-   DB\_HOST=localhost
-   DB\_DATABASE=percussao\_afro
-   DB\_USER=seu\_usuario
-   DB\_PASSWORD=sua\_senha
-   DB\_PORT=3306
-   TOKEN\_SECRET=uma\_frase\_longa\_e\_aleatoria
+   AMBIENTE\\\_PROCESSO=producao
+   APP\\\_HOST=localhost
+   APP\\\_PORT=3333
+   DB\\\_HOST=localhost
+   DB\\\_DATABASE=percussao\\\_afro
+   DB\\\_USER=seu\\\_usuario
+   DB\\\_PASSWORD=sua\\\_senha
+   DB\\\_PORT=3306
+   TOKEN\\\_SECRET=uma\\\_frase\\\_longa\\\_e\\\_aleatoria
    ```
 
-> Com `AMBIENTE\_PROCESSO=producao` a aplicação lê o `.env`; com `desenvolvimento`, lê o `.env.dev`.
+> Com `AMBIENTE\\\_PROCESSO=producao` a aplicação lê o `.env`; com `desenvolvimento`, lê o `.env.dev`.
 
 4. **Instale as dependências e inicie**
 
@@ -157,7 +156,7 @@ Crie um arquivo `.env` na raiz:
    npm start
    ```
 
-5. **Acesse** `http://localhost:3333` (ou a porta definida em `APP\_PORT`).
+5. **Acesse** `http://localhost:3333` (ou a porta definida em `APP\\\_PORT`).
 
 ## API
 
