@@ -32,8 +32,8 @@ CREATE TABLE tentativas_quiz(
     
 CREATE TABLE resposta_quiz(
     idResposta INT PRIMARY KEY AUTO_INCREMENT,
-    fkTentativa INT UNIQUE NOT NULL,
-    fkPergunta INT UNIQUE NOT NULL,
+    fkTentativa INT NOT NULL,
+    fkPergunta INT NOT NULL,
     alternativaEscolhida CHAR(1) NOT NULL,
     correta TINYINT(1) NOT NULL,
     CONSTRAINT pk_reposta_quiz PRIMARY KEY (idResposta, fkTentativa),
